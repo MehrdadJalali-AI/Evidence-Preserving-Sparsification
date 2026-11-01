@@ -61,9 +61,14 @@ def mcnemar(df, col, b=0.3):
     return pd.DataFrame(out)
 
 
+CI_COLS = {"correct_conservative", "correct_permissive"}
+
+
 def fmt(r, k, d=2):
     if pd.isna(r[k]): return "--"
-    return f"{r[k]:.{d}f} [{r[k+'_lo']:.{d}f}, {r[k+'_hi']:.{d}f}]" if d else f"{r[k]:.0f}"
+    if d == 0: return f"{r[k]:.0f}"
+    if k in CI_COLS: return f"{r[k]:.2f} [{r[k+'_lo']:.2f}, {r[k+'_hi']:.2f}]"
+    return f"{r[k]:.2f}"
 
 
 def tex_table(S, names, b, cols, heads, cap, lab):
@@ -103,7 +108,7 @@ def main(argv=None):
     metas = [json.load(open(f)) for f in sorted(glob.glob(os.path.join(d, "meta_seed_*.json")))]
     nq = df.groupby("seed").qid.nunique().sum()
     cap = (f"Full QMOF ({metas[0]['n_materials']:,} MOFs), {len(metas)} seeds, {nq} queries, budget $k$ = 30\\% of the query neighbourhood "
-           "(Full neighbourhood: unreduced). Mean with bootstrap 95\\% CI. Correct and coverage use the conservative reader; "
+           "(Full neighbourhood: unreduced). Means; bracketed: bootstrap 95\\% CI. Correct and coverage use the conservative reader; "
            "Unsupp.\\ and Contra.\\ use the denominators defined in Section~\\ref{sec:case}.")
     cols = ["correct_conservative", "answered_conservative", "audit_sufficient", "replay_ok", "correct_permissive", "unsupported_rate_perm", "contra_ret", "size", "edges"]
     heads = ["Correct", "Coverage", "Audit-suff.", "Replay", "Correct (perm.)", "Unsupp.\\ (perm.)", "Contra.", "Nodes", "Edges"]
@@ -111,7 +116,7 @@ def main(argv=None):
     cols2 = ["correct_conservative", "answered_conservative", "audit_sufficient", "replay_ok", "correct_permissive", "unmet_R4", "unmet_R2x", "size"]
     heads2 = ["Correct", "Coverage", "Audit-suff.", "Replay", "Correct (perm.)", "R4 unmet", "R2x unmet", "Nodes"]
     open(os.path.join(out, "table_ablation.tex"), "w").write(tex_table(S, ABL, 1.0, cols2, heads2,
-        "Ablations without budget pressure ($k$ = 100\\% of the neighbourhood). Mean with bootstrap 95\\% CI.", "tab:abl"))
+        "Ablations without budget pressure ($k$ = 100\\% of the neighbourhood). Means; bracketed: bootstrap 95\\% CI.", "tab:abl"))
     if sweeps:
         rows = []
         for sd in [d] + sweeps:
