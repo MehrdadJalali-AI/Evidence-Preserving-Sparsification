@@ -57,7 +57,7 @@ def chip(x, y, t, r=1.35, square=False, z=6, alpha=1.0, letter=True):
     else:
         ax.add_patch(Circle((x, y), r, fc=COL[t], ec="white", lw=0.4, zorder=z, alpha=alpha))
     if letter:
-        T(x, y - 0.05, t, size=6.3, weight="bold", color="white", ha="center", z=z + 1)
+        T(x, y - 0.05, t, size=min(8.0, 6.3 * r / 1.35), weight="bold", color="white", ha="center", z=z + 1)
 
 
 def pale(x, y, r=1.0):
@@ -81,11 +81,20 @@ for (x, y, w, h) in (PA, PB, PC):
 for (x, _, _, _), s in zip((PA, PB, PC), ("a   Ask and formalize", "b   Preserve complete audit units", "c   Answer and audit")):
     T(x + 1.8, 94.6, s, size=FSH, weight="bold")
 
+
+def G(pos, edges, dashed=(), r=1.25, sq=("X",), lw=0.7):
+    for a_, b_ in edges:
+        line(*zip(pos[a_], pos[b_]), color=COL["mute"], lw=lw, z=4)
+    for a_, b_ in dashed:
+        line(*zip(pos[a_], pos[b_]), color=COL["red"], lw=1.0, dashed=True, z=4)
+    for k_, (x0, y0) in pos.items():
+        chip(x0, y0, k_[0], r=r, square=k_[0] in sq)
+
 # ---------------------------------------------------------------- panel a
-sx, sy = 6.6, 79.5                                   # scientist silhouette
+sx, sy = 6.6, 79.5
 ax.add_patch(Circle((sx, sy + 4.6), 2.0, fc=COL["M"], ec="none", zorder=5))
 ax.add_patch(FancyBboxPatch((sx - 3.1, sy - 3.2), 6.2, 5.6, boxstyle="round,pad=0,rounding_size=2.3", fc=COL["M"], ec="none", zorder=5))
-bx, by, bw, bh = 11.8, 74.5, 35.4, 15.5               # question bubble
+bx, by, bw, bh = 11.8, 74.5, 35.4, 15.5
 box(bx, by, bw, bh, fc="white", ec=COL["C"], lw=1.1, r=2.2, z=4)
 ax.add_patch(Polygon([[bx + 0.3, by + 7.2], [bx - 2.6, by + 5.0], [bx + 0.3, by + 4.2]], closed=True, fc="white", ec=COL["C"], lw=1.1, zorder=4))
 ax.add_patch(Rectangle((bx - 0.05, by + 4.35), 0.8, 2.7, fc="white", ec="none", zorder=4.6))
@@ -95,109 +104,87 @@ for i, L in enumerate("ABCDEF"):
     cx = 23.5 + i * 3.95
     ax.add_patch(Circle((cx, 68.6), 1.55, fc=COL["M"], ec="white", lw=0.4, zorder=5))
     T(cx, 68.55, L, size=6.6, weight="bold", color="white", ha="center", z=7)
-box(6, 52.6, 38, 11.0, fc="white", ec=COL["mute"], lw=0.8)
-T(25, 61.0, "LLM query parser", size=FS, weight="bold", ha="center")
-T(25, 57.9, "optional natural-language", size=FS, color=COL["mute"], ha="center")
-T(25, 55.0, "interface", size=FS, color=COL["mute"], ha="center")
-box(6, 44.0, 38, 6.4, fc="white", ec=COL["mute"], lw=0.8)
-T(25, 47.2, "Schema validation", size=FS, weight="bold", ha="center")
-arrow((25, 66.3), (25, 63.7)); arrow((25, 52.5), (25, 50.5))
-box(4, 16.5, 42, 23.5, fc="white", ec=COL["ink"], lw=1.1, r=2)  # formal query
-T(25, 35.6, r"$q = (\mathrm{argmax},\ \mathrm{HSE06},\ C,\ k)$", size=FSL, weight="bold", ha="center")
-for j, (k_, v_) in enumerate((("operation", "argmax"), ("condition", "HSE06"), ("candidates", "C (MOFs A–F)"), ("node budget", "k"))):
-    T(6.5, 30.6 - j * 3.5, k_, size=FS, color=COL["mute"])
-    T(23.5, 30.6 - j * 3.5, v_, size=FS)
-arrow((25, 43.9), (25, 40.1))
+box(6, 50.5, 38, 10.5, fc="white", ec=COL["mute"], lw=0.8)
+T(25, 57.6, "Parse + schema check", size=FS, weight="bold", ha="center")
+T(25, 53.8, "(LLM parser optional)", size=FS, color=COL["mute"], ha="center")
+arrow((25, 66.3), (25, 61.1)); arrow((25, 50.4), (25, 42.1))
+box(4, 21.0, 42, 21.0, fc="white", ec=COL["ink"], lw=1.1, r=2)
+T(25, 35.0, r"$q = (\mathrm{argmax},\ \mathrm{HSE06},\ C,\ k)$", size=FSL, weight="bold", ha="center")
+T(25, 27.0, "operation · condition ·\ncandidates · node budget", size=FS, color=COL["mute"], ha="center")
 
 # ---------------------------------------------------------------- panel b
-T(59.6, 57.4, "query\nneighbourhood\nN(q)", size=FS, color=COL["mute"], ha="center")
-gx, gy = 60, 71
-outer = [(gx + 6.3 * math.cos(2 * math.pi * i / 10 + 0.3), gy + 8.0 * math.sin(2 * math.pi * i / 10 + 0.3)) for i in range(10)]
-inner = [(gx - 2.2, gy + 2.6), (gx + 2.4, gy + 3.0), (gx - 1.8, gy - 3.0), (gx + 2.3, gy - 2.7), (gx - 3.6, gy - 0.2)]
-for (x0, y0) in outer:
+gx, gy = 60.3, 72.5                                   # query neighbourhood graph (larger, typed)
+ring = [(gx + 9.0 * math.cos(2 * math.pi * i / 12 + 0.2), gy + 13.0 * math.sin(2 * math.pi * i / 12 + 0.2)) for i in range(12)]
+core = {"M": (gx, gy), "C1": (gx - 4.2, gy + 4.6), "C2": (gx + 4.4, gy + 4.2), "E": (gx - 5.6, gy - 1.6),
+        "K": (gx - 1.2, gy + 9.0), "Q": (gx + 5.4, gy - 2.4), "P": (gx + 1.2, gy - 6.8), "D": (gx - 3.6, gy - 7.0)}
+for (x0, y0) in ring:
     line([x0, gx], [y0, gy], color=COL["paleE"], lw=0.5)
-for (x0, y0) in outer:
-    pale(x0, y0, 0.9)
-for (x0, y0), t in zip(inner, "CKEQD"):
-    chip(x0, y0, t, r=1.0, alpha=0.5, letter=False)
-chip(gx, gy, "P", r=1.15, alpha=0.5, letter=False)
-# entry of q (from panel a) and arrow to units
-arrow((46.1, 28.0), (60, 28.0), lw=1.5); line([60, 60], [28.0, 50.0], lw=1.5)
-arrow((60, 49.9), (60, 52.0), lw=1.5)
+for (x0, y0) in ring:
+    pale(x0, y0, 1.05)
+G(core, [("M", "C1"), ("M", "C2"), ("C1", "E"), ("C1", "K"), ("C2", "Q"), ("E", "D"), ("D", "P"), ("Q", "P")], dashed=[("C1", "C2")], r=1.55)
+T(gx, 56.6, "N(q)", size=FS, color=COL["mute"], ha="center")
+arrow((46.1, 28.0), (60, 28.0), lw=1.5); line([60, 60], [28.0, 52.0], lw=1.5); arrow((60, 51.9), (60, 54.4), lw=1.5)
 T(61.3, 36, "q, k", size=FS, color=COL["mute"])
-arrow((66.8, 71), (69.6, 71), lw=1.2)
-# canonical audit units
-cx0, cw = 70, 34
-T(cx0 + cw / 2, 89.4, r"Query-specific audit units $U(q)$", size=FS, color=COL["mute"], ha="center")
-box(cx0, 74.5, cw, 12.0, fc="white", ec=COL["C"], lw=1.0)
-T(cx0 + 1.6, 83.8, "Support unit", size=FS, weight="bold", color=COL["C"])
-for i, t in enumerate("MCEKQPD"):
-    chip(cx0 + 3.0 + i * 3.45, 78.4, t)
-box(cx0, 59.5, cw, 12.0, fc="white", ec=COL["red"], lw=1.0)
-T(cx0 + 1.6, 68.8, "Contradiction unit", size=FS, weight="bold", color=COL["red"])
-chip(cx0 + 3.0, 63.6, "C"); chip(cx0 + 10.4, 63.6, "C")
-line([cx0 + 4.4, cx0 + 9.0], [63.6, 63.6], color=COL["red"], lw=1.1, dashed=True, z=5)
-for i, t in enumerate("EKQPD"):
-    chip(cx0 + 14.0 + i * 3.45, 63.6, t)
-box(cx0, 44.0, cw, 13.0, fc="white", ec=COL["X"], lw=1.0)
-T(cx0 + 1.6, 54.3, "Exclusion record", size=FS, weight="bold", color=COL["X"])
-chip(cx0 + 3.0, 50.4, "M"); chip(cx0 + 6.5, 50.4, "X", square=True)
-T(cx0 + 9.0, 50.4, "no HSE06 value in", size=FS)
-T(cx0 + 1.6, 46.6, "snapshot (closed world)", size=FS, color=COL["mute"])
+arrow((69.0, 73), (70.0, 73), lw=1.2)
+cx0, cw = 70.6, 34
+# support unit as a small graph
+box(cx0, 71.5, cw, 17.0, fc="white", ec=COL["C"], lw=1.0)
+T(cx0 + 1.6, 86.0, "Support unit", size=FS, weight="bold", color=COL["C"])
+G({"M": (cx0 + 3.2, 78.5), "C": (cx0 + 9.5, 78.5), "K": (cx0 + 9.5, 82.4), "Q": (cx0 + 9.5, 74.6), "E": (cx0 + 17, 78.5),
+   "P": (cx0 + 24.5, 81.9), "D": (cx0 + 24.5, 75.1)},
+  [("M", "C"), ("C", "K"), ("C", "Q"), ("C", "E"), ("E", "P"), ("E", "D"), ("D", "P")], r=1.55)
+# contradiction unit
+box(cx0, 54.0, cw, 16.0, fc="white", ec=COL["red"], lw=1.0)
+T(cx0 + 1.6, 67.6, "Contradiction unit", size=FS, weight="bold", color=COL["red"])
+G({"C0": (cx0 + 3.2, 61.0), "C": (cx0 + 9.5, 61.0), "K": (cx0 + 9.5, 64.7), "Q": (cx0 + 9.5, 57.3), "E": (cx0 + 17, 61.0),
+   "P": (cx0 + 24.5, 64.3), "D": (cx0 + 24.5, 57.7)},
+  [("C", "K"), ("C", "Q"), ("C", "E"), ("E", "P"), ("E", "D"), ("D", "P")], dashed=[("C0", "C")], r=1.55)
+# exclusion record
+box(cx0, 41.5, cw, 10.5, fc="white", ec=COL["X"], lw=1.0)
+T(cx0 + 1.6, 49.6, "Exclusion record", size=FS, weight="bold", color=COL["X"])
+G({"M": (cx0 + 3.2, 45.0), "X": (cx0 + 9.5, 45.0), "D": (cx0 + 17, 45.0), "P": (cx0 + 24.5, 45.0)},
+  [("M", "X"), ("X", "D"), ("D", "P")], r=1.55)
 box(cx0, 29.5, cw, 8.6, fc=COL["pale"], ec=COL["paleE"], lw=0.8, ls=(0, (2.2, 1.5)))
 T(cx0 + cw / 2, 35.4, "unit that does not fit", size=FS, color=COL["mute"], ha="center")
 T(cx0 + cw / 2, 32.0, "omitted, then reported", size=FS, color=COL["mute"], ha="center", style="italic")
-# whole-unit budget gate
-gx0, gw, gy0, gh = 107.5, 10.5, 44.0, 45.0
+gx0, gw, gy0, gh = 107.8, 10.2, 41.5, 47.0
 box(gx0, gy0, gw, gh, fc=COL["ink"], ec="none", r=2.0, z=2)
-T(gx0 + gw / 2, gy0 + gh - 6.5, r"$|S|\leq k$", size=FSL, weight="bold", color="white", ha="center")
+T(gx0 + gw / 2, gy0 + gh - 6.0, r"$|S|\leq k$", size=FSL, weight="bold", color="white", ha="center")
 T(gx0 + gw / 2, gy0 + gh / 2 - 4.5, "whole-unit budget gate", size=FS, weight="bold", color="white", ha="center", rot=90)
-for yy in (80.5, 65.5, 50.5):  # inputs
+for yy in (80.0, 62.0, 46.7):
     arrow((cx0 + cw + 0.2, yy), (gx0 - 0.2, yy))
-T(PB[0] + PB[2] / 2, 23.2, "Select complete units; never split an audit unit.", size=FS, weight="bold", ha="center")
-T(PB[0] + PB[2] / 2, 18.0, "Compression occurs at audit-unit boundaries.", size=FSL, weight="bold", color=COL["C"], ha="center")
+T(PB[0] + PB[2] / 2, 19.5, "Compression occurs at audit-unit boundaries.", size=FSL, weight="bold", color=COL["C"], ha="center")
 
 # ---------------------------------------------------------------- panel c
-# compact subgraph S (left) and audit certificate (right), side by side
-box(124.5, 57.0, 17.0, 34.5, fc="white", ec=COL["C"], lw=1.0)
-T(133.0, 87.6, "Compact\nsubgraph S", size=FS, weight="bold", ha="center")
-sp = {"M": (127.6, 78.5), "C": (132.2, 80.6), "E": (137.6, 81.8), "K": (131.2, 74.6), "Q": (137.2, 75.9), "P": (138.8, 70.2), "D": (133.2, 68.6)}
-for a_, b_ in (("M", "C"), ("C", "E"), ("C", "K"), ("C", "Q"), ("E", "P"), ("E", "D")):
-    line(*zip(sp[a_], sp[b_]), color=COL["mute"], lw=0.6, z=4)
-for t, (x0, y0) in sp.items():
-    chip(x0, y0, t, r=1.25)
-T(133.0, 62.6, "+ other\nunits", size=FS, color=COL["mute"], ha="center")
-box(143.3, 57.0, 32.0, 34.5, fc="white", ec=COL["ok"], lw=1.0)
-T(144.8, 88.6, "Audit certificate", size=FS, weight="bold", color=COL["ok"])
-items = ["R1 Support", "R2 Comparability", "R3 Qualification", "R4 Contradiction", "R5 Replay information", "Exclusion coverage"]
-for i, it in enumerate(items):
-    yy = 84.6 - i * 3.55
-    check(145.9, yy); T(147.6, yy, it, size=FS)
-T(144.8, 62.0, "per unit: selected\nwhole or omitted", size=FS, color=COL["mute"])
-arrow((118.1, 80.5), (124.4, 80.5), lw=1.5)                 # gate -> S
-arrow((141.6, 73.8), (143.2, 73.8), lw=1.1)                 # S -> certificate (certify)
-# outcome 1: all required units fit
-T(146.5, 53.0, "all required\nunits fit", size=FS, weight="bold", color=COL["ok"], ha="center")
-box(124.5, 40.0, 49.5, 9.0, fc="white", ec=COL["ink"], lw=1.1)
-T(149.25, 46.3, "Grounded reader / LLM", size=FS, weight="bold", ha="center")
-T(149.25, 42.8, "uses only S and the certificate", size=FS, color=COL["mute"], ha="center")
-arrow((133.0, 56.9), (133.0, 49.1)); arrow((159.0, 56.9), (159.0, 49.1))
-box(124.5, 25.0, 49.5, 13.2, fc="white", ec=COL["C"], lw=1.0)
-T(126.2, 36.2, "Example: real query of Figure 2", size=FS, color=COL["mute"], style="italic")
-T(126.2, 33.0, "MOF E has the largest HSE06", size=FS, weight="bold")
-T(126.2, 29.9, "band gap: 4.70 eV (DFT).", size=FS, weight="bold")
-warn(127.6, 26.9, s=1.1); T(129.6, 26.9, "Contested by an ML prediction", size=FS, color=COL["red"])
-arrow((149.25, 39.9), (149.25, 38.3))
-T(125.5, 22.0, "Audit:", size=FS, weight="bold", color=COL["mute"]); T(135.0, 22.0, "inspect sources →", size=FS, color=COL["mute"])
-T(125.5, 18.8, "check conditions → trace provenance", size=FS, color=COL["mute"])
-T(125.5, 15.6, "→ inspect replay information", size=FS, color=COL["mute"])
-# outcome 2: an essential unit is omitted
-box(124.5, 0.8, 49.5, 11.4, fc="white", ec=COL["X"], lw=1.1, r=1.8)
-T(149.25, 9.9, "essential unit omitted", size=FS, weight="bold", color=COL["X"], ha="center")
-T(149.25, 6.6, "→ unmet requirements →", size=FS, color=COL["X"], ha="center")
-T(149.25, 3.3, "qualified answer or abstention", size=FS, weight="bold", color=COL["X"], ha="center")
-line([cx0 + cw + 0.2, 121.0, 121.0], [33.8, 33.8, 6.6], color=COL["X"], lw=0.9, dashed=True)
-arrow((121.0, 6.6), (124.4, 6.6), color=COL["X"], dashed=True, lw=0.9)
+box(124.5, 61.0, 49.5, 31.0, fc="white", ec=COL["C"], lw=1.0)
+T(126.2, 89.3, "Compact subgraph S", size=FS, weight="bold")
+sp = {"M": (130.0, 71.0), "C1": (137.0, 77.0), "E1": (143.0, 82.5), "K1": (131.0, 81.5), "Q1": (143.5, 72.5), "D1": (149.0, 79.0),
+      "P1": (153.0, 85.5), "C2": (158.5, 74.0), "E2": (164.5, 80.0), "K2": (168.5, 70.5), "Q2": (161.0, 66.5), "D2": (170.0, 77.0),
+      "P2": (169.5, 85.5), "X": (136.5, 64.5), "D3": (144.5, 63.5)}
+G(sp, [("M", "C1"), ("C1", "E1"), ("C1", "K1"), ("C1", "Q1"), ("E1", "D1"), ("D1", "P1"), ("E1", "P1"), ("M", "C2"),
+       ("C2", "E2"), ("C2", "K2"), ("C2", "Q2"), ("E2", "D2"), ("D2", "P2"), ("E2", "P2"), ("M", "X"), ("X", "D3"), ("D3", "P1")],
+  dashed=[("C1", "C2")], r=1.65)
+arrow((118.1, 80.0), (124.4, 80.0), lw=1.5)
+box(124.5, 44.0, 49.5, 14.6, fc="white", ec=COL["ok"], lw=1.0)
+T(126.2, 56.3, "Audit certificate", size=FS, weight="bold", color=COL["ok"])
+for i, it in enumerate(("Support", "Comparability", "Qualification", "Contradiction", "Replay info", "Exclusion")):
+    xx = 127.0 + (i % 2) * 24.0; yy = 52.6 - (i // 2) * 3.3
+    check(xx, yy); T(xx + 1.6, yy, it, size=FS)
+arrow((149.25, 60.9), (149.25, 58.7))
+box(124.5, 33.0, 49.5, 8.6, fc="white", ec=COL["ink"], lw=1.1)
+T(149.25, 38.9, "Grounded reader / LLM", size=FS, weight="bold", ha="center")
+T(149.25, 35.4, "uses only S + certificate", size=FS, color=COL["mute"], ha="center")
+arrow((149.25, 43.9), (149.25, 41.7))
+box(124.5, 18.5, 49.5, 12.0, fc="white", ec=COL["C"], lw=1.0)
+T(126.2, 27.6, "MOF E: largest HSE06 gap,", size=FS, weight="bold")
+T(126.2, 24.4, "4.70 eV (DFT)", size=FS, weight="bold")
+warn(127.6, 21.1, s=1.1); T(129.6, 21.1, "contested by ML prediction", size=FS, color=COL["red"])
+arrow((149.25, 32.9), (149.25, 30.6))
+box(124.5, 1.8, 49.5, 9.0, fc="white", ec=COL["X"], lw=1.1, r=1.8)
+T(149.25, 8.0, "essential unit omitted →", size=FS, weight="bold", color=COL["X"], ha="center")
+T(149.25, 4.6, "qualified answer or abstention", size=FS, color=COL["X"], ha="center")
+line([cx0 + cw + 0.2, 121.0, 121.0], [33.8, 33.8, 6.3], color=COL["X"], lw=0.9, dashed=True)
+arrow((121.0, 6.3), (124.4, 6.3), color=COL["X"], dashed=True, lw=0.9)
 
 # ---------------------------------------------------------------- legend (once), positions from measured text widths
 REND = fig.canvas.get_renderer()
