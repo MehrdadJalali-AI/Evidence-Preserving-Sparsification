@@ -11,11 +11,25 @@ def budget(q, N, frac):
     return max(len(q["cands"]), int(frac * len(N)))
 
 
+class InfeasibleBudget(ValueError):
+    """Raised when k < |C|: EPS must retain every candidate anchor M_m, so no output exists.
+    `certificate` records the query, the budget and the minimum feasible budget |C|."""
+    def __init__(self, q, k):
+        self.certificate = {"status": "infeasible", "reason": "k < |C|", "k": int(k),
+                            "n_candidates": len(q["cands"]), "min_feasible_k": len(q["cands"])}
+        super().__init__(f"infeasible budget: k={k} < |C|={len(q['cands'])}")
+
+
 def eps(g, q, k, drop=(), units=None):
     """Greedy unit selection. Bundles: each support unit with its contradiction units, in
     decreasing claim value; if a bundle does not fit, its support unit alone is tried (its
     R4 requirement is then reported unmet). Exclusion units follow, in candidate order.
-    Units are added whole or not at all. `drop` removes node types (ablations) or 'contra'."""
+    Units are accepted or rejected atomically; shared nodes and the mandatory candidate
+    anchors may already be present through other selected units or the initial anchor set.
+    Feasibility requires k >= |C|; otherwise InfeasibleBudget (with a certificate) is raised.
+    `drop` removes node types (ablations) or 'contra'."""
+    if k < len(q["cands"]):
+        raise InfeasibleBudget(q, k)
     units = units if units is not None else audit_units(g, q)
     if "contra" in drop:
         units = [u for u in units if u["kind"] != "contradiction"]

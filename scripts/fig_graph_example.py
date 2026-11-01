@@ -52,18 +52,22 @@ def draw(ax, S, title, sub):
                                node_shape="s" if t == "X" else "o")
     for i, m in enumerate(q["cands"]):
         x, y = pos[f"M:{m}"]
-        ax.text(x, y + .065, f"MOF {chr(65+i)}", ha="center", fontsize=9, fontweight="bold",
+        ax.text(x, y + .065, f"MOF {chr(65+i)}", ha="center", fontsize=10.2, fontweight="bold",
                 color="#222" if f"M:{m}" in S else "#aaa", bbox=dict(boxstyle="round,pad=.15", fc="white", ec="none", alpha=.85))
-    ax.set_title(title, fontsize=12, fontweight="bold", loc="left")
-    ax.text(0, -.03, sub, transform=ax.transAxes, fontsize=10, va="top"); ax.set_axis_off()
+    ax.set_title(title, fontsize=13.5, fontweight="bold", loc="left")
+    ax.text(0, -.03, sub, transform=ax.transAxes, fontsize=11.3, va="top"); ax.set_axis_off()
 
 fig, ax = plt.subplots(1, 3, figsize=(17, 6.4))
 draw(ax[0], N, "(a) Query neighbourhood", f"{len(N)} nodes")
 draw(ax[1], Se, "(b) EPS", f"{len(Se)} nodes ({100*len(Se)/len(N):.0f}%) — audit-sufficient\nconservative reader: {verdict(conservative(g, q, Se))}")
 draw(ax[2], Sp, "(c) PPR relevance, same size", f"{len(Sp)} nodes — not audit-sufficient\nconservative reader: {verdict(conservative(g, q, Sp))}; permissive: {verdict(permissive(g, q, Sp))}")
-h = [Line2D([0], [0], marker="s" if t == "X" else "o", ls="", markerfacecolor=COL[t], markeredgecolor="white", markersize=10, label=NAME[t]) for t in COL]
+h = [Line2D([0], [0], marker="s" if t == "X" else "o", ls="", markerfacecolor=COL[t], markeredgecolor="white", markersize=11, label=NAME[t]) for t in COL]
 h += [Line2D([0], [0], color="#C0392B", ls="--", lw=2.4, label="Contradiction"),
-      Line2D([0], [0], marker="o", ls="", markerfacecolor="#efefef", markeredgecolor="#ccc", markersize=10, label="Not retained")]
-fig.legend(handles=h, loc="lower center", ncol=10, fontsize=10, frameon=False)
+      Line2D([0], [0], marker="o", ls="", markerfacecolor="#efefef", markeredgecolor="#ccc", markersize=11, label="Not retained")]
+fig.legend(handles=h, loc="lower center", ncol=10, fontsize=11.3, frameon=False)
 fig.tight_layout(rect=(0, .07, 1, 1)); fig.savefig(out + ".pdf"); fig.savefig(out + ".png", dpi=170)
-json.dump(dict(cands=q["cands"], N=len(N), S_eps=len(Se)), open(out + ".json", "w"))
+win = ref["result"]; win = win[0] if isinstance(win, (list, tuple)) else win
+wid = str(win).replace("M:", ""); val = float(df.set_index("qmof_id").loc[wid, "outputs.hse06.bandgap"])
+print("winner", wid, "label", "MOF " + chr(65 + q["cands"].index(wid)), "HSE06", round(val, 4))
+json.dump(dict(query_id="fig2-s1-g11", seed=1, generator_seed=11, cands=q["cands"], winner=wid,
+               winner_label="MOF " + chr(65 + q["cands"].index(wid)), winner_hse06_ev=val, N=len(N), S_eps=len(Se)), open(out + ".json", "w"))

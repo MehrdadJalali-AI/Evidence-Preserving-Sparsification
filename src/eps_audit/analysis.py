@@ -84,16 +84,16 @@ def figure(S, path):
     col = ["#1b6ca8", "#7b2cbf", "#264653", "#2a9d8f", "#d1495b", "#edae49", "#66a182"]
     fig, ax = plt.subplots(1, 4, figsize=(15, 3.7))
     panels = [("correct_conservative", "Correct (conservative reader)"), ("answered_conservative", "Answer coverage (conservative)"),
-              ("audit_sufficient", "Audit-sufficient (all R1–R5)"), ("correct_permissive", "Correct (permissive reader)")]
+              ("audit_sufficient", "Audit-sufficient (R1–R5, R2x)"), ("correct_permissive", "Correct (permissive reader)")]
     for m, c in zip(SHOW, col):
         t = S[S.method == m].sort_values("budget")
         for a, (k, lab) in zip(ax, panels):
             a.plot(t.budget * 100, t[k], marker="o", ms=4, lw=1.7, color=c, label=m)
             a.fill_between(t.budget * 100, t[k + "_lo"], t[k + "_hi"], color=c, alpha=.15, lw=0)
-            a.set_title(lab, fontsize=10); a.set_ylim(-0.03, 1.03); a.grid(alpha=.3)
-            a.set_xlabel("Budget k (% of query neighbourhood)", fontsize=8.5)
+            a.set_title(lab, fontsize=11.5); a.set_ylim(-0.03, 1.03); a.grid(alpha=.3)
+            a.set_xlabel("Budget k (% of query neighbourhood)", fontsize=9.7); a.tick_params(labelsize=9.5)
     h, l = ax[0].get_legend_handles_labels()
-    fig.legend(h, l, loc="lower center", ncol=7, fontsize=8, frameon=False)
+    fig.legend(h, l, loc="lower center", ncol=7, fontsize=9.2, frameon=False)
     fig.tight_layout(rect=(0, 0.08, 1, 1)); fig.savefig(path + ".pdf"); fig.savefig(path + ".png", dpi=170)
 
 

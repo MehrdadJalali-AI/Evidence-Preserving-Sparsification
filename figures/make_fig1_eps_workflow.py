@@ -167,8 +167,8 @@ G(sp, [("M", "C1"), ("C1", "E1"), ("C1", "K1"), ("C1", "Q1"), ("E1", "D1"), ("D1
 arrow((118.1, 80.0), (124.4, 80.0), lw=1.5)
 box(124.5, 44.0, 49.5, 14.6, fc="white", ec=COL["ok"], lw=1.0)
 T(126.2, 56.3, "Audit certificate", size=FS, weight="bold", color=COL["ok"])
-for i, it in enumerate(("Support", "Comparability", "Qualification", "Contradiction", "Replay info", "Exclusion")):
-    xx = 127.0 + (i % 2) * 24.0; yy = 52.6 - (i // 2) * 3.3
+for i, it in enumerate(("Support", "Comparability", "Qualification", "Contradiction", "Exclusion (R2x)", "Replay info")):
+    xx = 127.0 + (i % 2) * 24.6; yy = 52.6 - (i // 2) * 3.3
     check(xx, yy); T(xx + 1.6, yy, it, size=FS)
 arrow((149.25, 60.9), (149.25, 58.7))
 box(124.5, 33.0, 49.5, 8.6, fc="white", ec=COL["ink"], lw=1.1)

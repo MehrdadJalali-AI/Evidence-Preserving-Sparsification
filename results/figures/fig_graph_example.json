@@ -1,1 +1,1 @@
-{"cands": ["qmof-1e87041", "qmof-868bfa7", "qmof-363055b", "qmof-9e009cd", "qmof-fc2015a", "qmof-797a5a3"], "N": 100, "S_eps": 27}
+{"query_id": "fig2-s1-g11", "seed": 1, "generator_seed": 11, "cands": ["qmof-1e87041", "qmof-868bfa7", "qmof-363055b", "qmof-9e009cd", "qmof-fc2015a", "qmof-797a5a3"], "winner": "qmof-fc2015a", "winner_label": "MOF E", "winner_hse06_ev": 4.69853, "N": 100, "S_eps": 27}

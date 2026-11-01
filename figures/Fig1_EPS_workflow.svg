@@ -1586,19 +1586,19 @@ z
     <text style="font-size: 8px; font-family: 'Liberation Sans'; text-anchor: start; fill: #1f2328" x="364.535433" y="136.432517" transform="rotate(-0 364.535433 136.432517)">Support</text>
    </g>
    <g id="text_23">
-    <text style="font-size: 8px; font-family: 'Liberation Sans'; text-anchor: start; fill: #1f2328" x="432.566929" y="136.432517" transform="rotate(-0 432.566929 136.432517)">Comparability</text>
+    <text style="font-size: 8px; font-family: 'Liberation Sans'; text-anchor: start; fill: #1f2328" x="434.267717" y="136.432517" transform="rotate(-0 434.267717 136.432517)">Comparability</text>
    </g>
    <g id="text_24">
     <text style="font-size: 8px; font-family: 'Liberation Sans'; text-anchor: start; fill: #1f2328" x="364.535433" y="145.786848" transform="rotate(-0 364.535433 145.786848)">Qualification</text>
    </g>
    <g id="text_25">
-    <text style="font-size: 8px; font-family: 'Liberation Sans'; text-anchor: start; fill: #1f2328" x="432.566929" y="145.786848" transform="rotate(-0 432.566929 145.786848)">Contradiction</text>
+    <text style="font-size: 8px; font-family: 'Liberation Sans'; text-anchor: start; fill: #1f2328" x="434.267717" y="145.786848" transform="rotate(-0 434.267717 145.786848)">Contradiction</text>
    </g>
    <g id="text_26">
-    <text style="font-size: 8px; font-family: 'Liberation Sans'; text-anchor: start; fill: #1f2328" x="364.535433" y="155.141179" transform="rotate(-0 364.535433 155.141179)">Replay info</text>
+    <text style="font-size: 8px; font-family: 'Liberation Sans'; text-anchor: start; fill: #1f2328" x="364.535433" y="155.141179" transform="rotate(-0 364.535433 155.141179)">Exclusion (R2x)</text>
    </g>
    <g id="text_27">
-    <text style="font-size: 8px; font-family: 'Liberation Sans'; text-anchor: start; fill: #1f2328" x="432.566929" y="155.141179" transform="rotate(-0 432.566929 155.141179)">Exclusion</text>
+    <text style="font-size: 8px; font-family: 'Liberation Sans'; text-anchor: start; fill: #1f2328" x="434.267717" y="155.141179" transform="rotate(-0 434.267717 155.141179)">Replay info</text>
    </g>
    <g id="text_28">
     <text style="font-weight: 700; font-size: 8px; font-family: 'Liberation Sans'; text-anchor: middle; fill: #1f2328" x="423.070866" y="175.267163" transform="rotate(-0 423.070866 175.267163)">Grounded reader / LLM</text>
@@ -1904,9 +1904,9 @@ L 362.834646 131.811024
 " clip-path="url(#p108a5679fb)" style="fill: none; stroke: #2a7d4f; stroke-width: 1.2; stroke-linecap: round"/>
    </g>
    <g id="line2d_63">
-    <path d="M 425.480315 134.362205 
-L 427.322835 136.346457 
-L 430.866142 131.811024 
+    <path d="M 427.181102 134.362205 
+L 429.023622 136.346457 
+L 432.566929 131.811024 
 " clip-path="url(#p108a5679fb)" style="fill: none; stroke: #2a7d4f; stroke-width: 1.2; stroke-linecap: round"/>
    </g>
    <g id="line2d_64">
@@ -1916,9 +1916,9 @@ L 362.834646 141.165354
 " clip-path="url(#p108a5679fb)" style="fill: none; stroke: #2a7d4f; stroke-width: 1.2; stroke-linecap: round"/>
    </g>
    <g id="line2d_65">
-    <path d="M 425.480315 143.716535 
-L 427.322835 145.700787 
-L 430.866142 141.165354 
+    <path d="M 427.181102 143.716535 
+L 429.023622 145.700787 
+L 432.566929 141.165354 
 " clip-path="url(#p108a5679fb)" style="fill: none; stroke: #2a7d4f; stroke-width: 1.2; stroke-linecap: round"/>
    </g>
    <g id="line2d_66">
@@ -1928,9 +1928,9 @@ L 362.834646 150.519685
 " clip-path="url(#p108a5679fb)" style="fill: none; stroke: #2a7d4f; stroke-width: 1.2; stroke-linecap: round"/>
    </g>
    <g id="line2d_67">
-    <path d="M 425.480315 153.070866 
-L 427.322835 155.055118 
-L 430.866142 150.519685 
+    <path d="M 427.181102 153.070866 
+L 429.023622 155.055118 
+L 432.566929 150.519685 
 " clip-path="url(#p108a5679fb)" style="fill: none; stroke: #2a7d4f; stroke-width: 1.2; stroke-linecap: round"/>
    </g>
    <g id="patch_103">
