@@ -95,12 +95,13 @@ for i, L in enumerate("ABCDEF"):
     cx = 23.5 + i * 3.95
     ax.add_patch(Circle((cx, 68.6), 1.55, fc=COL["M"], ec="white", lw=0.4, zorder=5))
     T(cx, 68.55, L, size=6.6, weight="bold", color="white", ha="center", z=7)
-box(6, 54.5, 38, 8.3, fc="white", ec=COL["mute"], lw=0.8)
-T(25, 60.0, "LLM query parser", size=FS, weight="bold", ha="center")
-T(25, 56.8, "translates the question only", size=FS, color=COL["mute"], ha="center")
+box(6, 52.6, 38, 11.0, fc="white", ec=COL["mute"], lw=0.8)
+T(25, 61.0, "LLM query parser", size=FS, weight="bold", ha="center")
+T(25, 57.9, "optional natural-language", size=FS, color=COL["mute"], ha="center")
+T(25, 55.0, "interface", size=FS, color=COL["mute"], ha="center")
 box(6, 44.0, 38, 6.4, fc="white", ec=COL["mute"], lw=0.8)
 T(25, 47.2, "Schema validation", size=FS, weight="bold", ha="center")
-arrow((25, 66.3), (25, 62.9)); arrow((25, 54.4), (25, 50.5))
+arrow((25, 66.3), (25, 63.7)); arrow((25, 52.5), (25, 50.5))
 box(4, 16.5, 42, 23.5, fc="white", ec=COL["ink"], lw=1.1, r=2)  # formal query
 T(25, 35.6, r"$q = (\mathrm{argmax},\ \mathrm{HSE06},\ C,\ k)$", size=FSL, weight="bold", ha="center")
 for j, (k_, v_) in enumerate((("operation", "argmax"), ("condition", "HSE06"), ("candidates", "C (MOFs A–F)"), ("node budget", "k"))):
@@ -127,7 +128,7 @@ T(61.3, 36, "q, k", size=FS, color=COL["mute"])
 arrow((66.8, 71), (69.6, 71), lw=1.2)
 # canonical audit units
 cx0, cw = 70, 34
-T(cx0 + cw / 2, 89.4, r"canonical audit units $\sigma(q)$", size=FS, color=COL["mute"], ha="center")
+T(cx0 + cw / 2, 89.4, r"Query-specific audit units $U(q)$", size=FS, color=COL["mute"], ha="center")
 box(cx0, 74.5, cw, 12.0, fc="white", ec=COL["C"], lw=1.0)
 T(cx0 + 1.6, 83.8, "Support unit", size=FS, weight="bold", color=COL["C"])
 for i, t in enumerate("MCEKQPD"):
@@ -136,14 +137,13 @@ box(cx0, 59.5, cw, 12.0, fc="white", ec=COL["red"], lw=1.0)
 T(cx0 + 1.6, 68.8, "Contradiction unit", size=FS, weight="bold", color=COL["red"])
 chip(cx0 + 3.0, 63.6, "C"); chip(cx0 + 10.4, 63.6, "C")
 line([cx0 + 4.4, cx0 + 9.0], [63.6, 63.6], color=COL["red"], lw=1.1, dashed=True, z=5)
-for i, t in enumerate("EKQ"):
+for i, t in enumerate("EKQPD"):
     chip(cx0 + 14.0 + i * 3.45, 63.6, t)
 box(cx0, 44.0, cw, 13.0, fc="white", ec=COL["X"], lw=1.0)
 T(cx0 + 1.6, 54.3, "Exclusion record", size=FS, weight="bold", color=COL["X"])
 chip(cx0 + 3.0, 50.4, "M"); chip(cx0 + 6.5, 50.4, "X", square=True)
 T(cx0 + 9.0, 50.4, "no HSE06 value in", size=FS)
 T(cx0 + 1.6, 46.6, "snapshot (closed world)", size=FS, color=COL["mute"])
-T(cx0 + cw / 2, 41.3, "shared P, D nodes counted once", size=FS, color=COL["mute"], ha="center")
 box(cx0, 29.5, cw, 8.6, fc=COL["pale"], ec=COL["paleE"], lw=0.8, ls=(0, (2.2, 1.5)))
 T(cx0 + cw / 2, 35.4, "unit that does not fit", size=FS, color=COL["mute"], ha="center")
 T(cx0 + cw / 2, 32.0, "omitted, then reported", size=FS, color=COL["mute"], ha="center", style="italic")
@@ -152,53 +152,52 @@ gx0, gw, gy0, gh = 107.5, 10.5, 44.0, 45.0
 box(gx0, gy0, gw, gh, fc=COL["ink"], ec="none", r=2.0, z=2)
 T(gx0 + gw / 2, gy0 + gh - 6.5, r"$|S|\leq k$", size=FSL, weight="bold", color="white", ha="center")
 T(gx0 + gw / 2, gy0 + gh / 2 - 4.5, "whole-unit budget gate", size=FS, weight="bold", color="white", ha="center", rot=90)
-for yy in (80.5, 65.5, 50.5):
+for yy in (80.5, 65.5, 50.5):  # inputs
     arrow((cx0 + cw + 0.2, yy), (gx0 - 0.2, yy))
 T(PB[0] + PB[2] / 2, 23.2, "Select complete units; never split an audit unit.", size=FS, weight="bold", ha="center")
 T(PB[0] + PB[2] / 2, 18.0, "Compression occurs at audit-unit boundaries.", size=FSL, weight="bold", color=COL["C"], ha="center")
 
 # ---------------------------------------------------------------- panel c
-# outputs: compact subgraph S (top) and certificate (below)
-box(124.5, 77.0, 49, 14.5, fc="white", ec=COL["C"], lw=1.0)
-T(126.2, 88.7, "Compact evidence subgraph S", size=FS, weight="bold")
-sp = {"M": (128.5, 81.6), "C": (134, 83.2), "E": (139.5, 85.0), "K": (139.5, 80.0), "Q": (145, 82.3), "P": (151, 85.4), "D": (151, 79.6)}
+# compact subgraph S (left) and audit certificate (right), side by side
+box(124.5, 57.0, 17.0, 34.5, fc="white", ec=COL["C"], lw=1.0)
+T(133.0, 87.6, "Compact\nsubgraph S", size=FS, weight="bold", ha="center")
+sp = {"M": (127.6, 78.5), "C": (132.2, 80.6), "E": (137.6, 81.8), "K": (131.2, 74.6), "Q": (137.2, 75.9), "P": (138.8, 70.2), "D": (133.2, 68.6)}
 for a_, b_ in (("M", "C"), ("C", "E"), ("C", "K"), ("C", "Q"), ("E", "P"), ("E", "D")):
     line(*zip(sp[a_], sp[b_]), color=COL["mute"], lw=0.6, z=4)
 for t, (x0, y0) in sp.items():
     chip(x0, y0, t, r=1.25)
-chip(159.5, 82.6, "M"); chip(163.0, 82.6, "X", square=True); chip(168.2, 82.6, "C"); chip(171.5, 82.6, "E")
-T(165.5, 79.3, "+ other units", size=FS, color=COL["mute"], ha="center")
-box(124.5, 49.6, 49, 25.9, fc="white", ec=COL["ok"], lw=1.0)
-T(126.2, 72.7, "Audit certificate", size=FS, weight="bold", color=COL["ok"])
-items = ["R1 Support", "R2 Comparability", "R3 Qualification", "R4 Contradiction", "R5 Replay information", "R2x Exclusion"]
+T(133.0, 62.6, "+ other\nunits", size=FS, color=COL["mute"], ha="center")
+box(143.3, 57.0, 32.0, 34.5, fc="white", ec=COL["ok"], lw=1.0)
+T(144.8, 88.6, "Audit certificate", size=FS, weight="bold", color=COL["ok"])
+items = ["R1 Support", "R2 Comparability", "R3 Qualification", "R4 Contradiction", "R5 Replay information", "Exclusion coverage"]
 for i, it in enumerate(items):
-    yy = 69.0 - i * 3.3
-    check(127.6, yy); T(129.4, yy, it, size=FS)
-T(172.3, 61.5, "per unit:\ncomplete,\npartial or\nomitted", size=FS, color=COL["mute"], ha="right")
-arrow((118.1, 84.0), (124.4, 84.0), lw=1.5)
-arrow((118.1, 62.0), (124.4, 62.0), lw=1.5)
-# reader
-box(124.5, 38.5, 49, 9.2, fc="white", ec=COL["ink"], lw=1.1)
-T(149, 44.7, "Grounded reader / LLM", size=FS, weight="bold", ha="center")
-T(149, 41.3, "uses only S and the certificate", size=FS, color=COL["mute"], ha="center")
-arrow((149, 49.5), (149, 47.8))
-line([173.6, 175.6, 175.6], [84.0, 84.0, 43.1], color=COL["ink"], lw=1.1); arrow((175.6, 43.1), (173.7, 43.1))
-# answer
-box(124.5, 25.4, 49, 10.6, fc="white", ec=COL["C"], lw=1.0)
-T(126.2, 33.6, "MOF E has the largest HSE06", size=FS, weight="bold")
-T(126.2, 30.6, "band gap: 4.70 eV (DFT).", size=FS, weight="bold")
-warn(127.6, 27.5, s=1.1); T(129.6, 27.5, "Contested by an ML prediction", size=FS, color=COL["red"])
-arrow((149, 38.4), (149, 36.1))
-# audit pathway (dashed = verification)
-T(125.5, 22.2, "Audit:", size=FS, weight="bold", color=COL["mute"]); T(135.0, 22.2, "inspect sources →", size=FS, color=COL["mute"])
-T(125.5, 19.0, "check conditions → trace provenance", size=FS, color=COL["mute"])
-T(125.5, 15.8, "→ replay answer", size=FS, color=COL["mute"])
-# unmet-requirement branch (from the omitted unit, dashed, routed below panels)
-box(124.5, 3.6, 49, 7.8, fc="white", ec=COL["X"], lw=1.1, r=1.8)
-T(149, 9.0, "Unmet essential requirement", size=FS, weight="bold", color=COL["X"], ha="center")
-T(149, 5.8, "→ qualified answer or abstention", size=FS, weight="bold", color=COL["X"], ha="center")
-line([cx0 + cw + 0.2, 121.0, 121.0], [33.8, 33.8, 7.5], color=COL["X"], lw=0.9, dashed=True)
-arrow((121.0, 7.5), (124.4, 7.5), color=COL["X"], dashed=True, lw=0.9)
+    yy = 84.6 - i * 3.55
+    check(145.9, yy); T(147.6, yy, it, size=FS)
+T(144.8, 62.0, "per unit: selected\nwhole or omitted", size=FS, color=COL["mute"])
+arrow((118.1, 80.5), (124.4, 80.5), lw=1.5)                 # gate -> S
+arrow((141.6, 73.8), (143.2, 73.8), lw=1.1)                 # S -> certificate (certify)
+# outcome 1: all required units fit
+T(146.5, 53.0, "all required\nunits fit", size=FS, weight="bold", color=COL["ok"], ha="center")
+box(124.5, 40.0, 49.5, 9.0, fc="white", ec=COL["ink"], lw=1.1)
+T(149.25, 46.3, "Grounded reader / LLM", size=FS, weight="bold", ha="center")
+T(149.25, 42.8, "uses only S and the certificate", size=FS, color=COL["mute"], ha="center")
+arrow((133.0, 56.9), (133.0, 49.1)); arrow((159.0, 56.9), (159.0, 49.1))
+box(124.5, 25.0, 49.5, 13.2, fc="white", ec=COL["C"], lw=1.0)
+T(126.2, 36.2, "Example: real query of Figure 2", size=FS, color=COL["mute"], style="italic")
+T(126.2, 33.0, "MOF E has the largest HSE06", size=FS, weight="bold")
+T(126.2, 29.9, "band gap: 4.70 eV (DFT).", size=FS, weight="bold")
+warn(127.6, 26.9, s=1.1); T(129.6, 26.9, "Contested by an ML prediction", size=FS, color=COL["red"])
+arrow((149.25, 39.9), (149.25, 38.3))
+T(125.5, 22.0, "Audit:", size=FS, weight="bold", color=COL["mute"]); T(135.0, 22.0, "inspect sources →", size=FS, color=COL["mute"])
+T(125.5, 18.8, "check conditions → trace provenance", size=FS, color=COL["mute"])
+T(125.5, 15.6, "→ inspect replay information", size=FS, color=COL["mute"])
+# outcome 2: an essential unit is omitted
+box(124.5, 0.8, 49.5, 11.4, fc="white", ec=COL["X"], lw=1.1, r=1.8)
+T(149.25, 9.9, "essential unit omitted", size=FS, weight="bold", color=COL["X"], ha="center")
+T(149.25, 6.6, "→ unmet requirements →", size=FS, color=COL["X"], ha="center")
+T(149.25, 3.3, "qualified answer or abstention", size=FS, weight="bold", color=COL["X"], ha="center")
+line([cx0 + cw + 0.2, 121.0, 121.0], [33.8, 33.8, 6.6], color=COL["X"], lw=0.9, dashed=True)
+arrow((121.0, 6.6), (124.4, 6.6), color=COL["X"], dashed=True, lw=0.9)
 
 # ---------------------------------------------------------------- legend (once), positions from measured text widths
 REND = fig.canvas.get_renderer()
