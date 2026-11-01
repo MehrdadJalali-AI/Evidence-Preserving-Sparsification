@@ -1,0 +1,25 @@
+metric,method,eps_only,other_only,p
+correct_conservative,Condition-aware closure,86,0,2.5849394142282115e-26
+correct_conservative,Conflict-free (CONSIST-inspired),52,0,4.440892098500626e-16
+correct_conservative,Degree,900,0,2.3661043723335494e-271
+correct_conservative,EPS-noCond,900,0,2.3661043723335494e-271
+correct_conservative,EPS-noContra,52,0,4.440892098500626e-16
+correct_conservative,EPS-noExcl,0,0,1.0
+correct_conservative,EPS-noProv,0,0,1.0
+correct_conservative,EPS-noQual,900,0,2.3661043723335494e-271
+correct_conservative,Full neighbourhood,0,0,1.0
+correct_conservative,PPR relevance,900,0,2.3661043723335494e-271
+correct_conservative,Random,900,0,2.3661043723335494e-271
+correct_conservative,Type-aware closure,895,0,7.571533991467358e-270
+audit_sufficient,Condition-aware closure,900,0,2.3661043723335494e-271
+audit_sufficient,Conflict-free (CONSIST-inspired),900,0,2.3661043723335494e-271
+audit_sufficient,Degree,900,0,2.3661043723335494e-271
+audit_sufficient,EPS-noCond,900,0,2.3661043723335494e-271
+audit_sufficient,EPS-noContra,141,0,7.174648137343064e-43
+audit_sufficient,EPS-noExcl,900,0,2.3661043723335494e-271
+audit_sufficient,EPS-noProv,900,0,2.3661043723335494e-271
+audit_sufficient,EPS-noQual,900,0,2.3661043723335494e-271
+audit_sufficient,Full neighbourhood,0,0,1.0
+audit_sufficient,PPR relevance,900,0,2.3661043723335494e-271
+audit_sufficient,Random,900,0,2.3661043723335494e-271
+audit_sufficient,Type-aware closure,900,0,2.3661043723335494e-271

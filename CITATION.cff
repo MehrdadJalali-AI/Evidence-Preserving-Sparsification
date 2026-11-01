@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Evidence-Preserving Sparsification (EPS): reference implementation and reproducibility package"
+version: 1.0.0
+license: MIT
+repository-code: "https://github.com/MehrdadJalali-AI/Evidence-Preserving-Sparsification"
+authors:
+  - family-names: Jalali
+    given-names: Mehrdad
+    affiliation: "SRH University of Applied Sciences Heidelberg"
+  - family-names: Nadimi-Shahraki
+    given-names: Mohammad H.
+    affiliation: "National Yunlin University of Science and Technology"
+keywords: [knowledge graphs, provenance, auditable AI, graph sparsification, metal-organic frameworks, QMOF]

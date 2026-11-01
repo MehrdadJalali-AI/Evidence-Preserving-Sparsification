@@ -1,0 +1,5 @@
+{"data": "data/raw/qmof.csv", "sha256": "9991b2d51d71a6cc4c97affd8ca36ac18d5b75554b4f3f1ac9ebb35bc9995f26",
+ "snapshot_id": "QMOF database (figshare 10.6084/m9.figshare.13147324), qmof.csv",
+ "target": "hse06", "conditions": ["hle17", "hse06_10hf", "hse06"],
+ "contra_ev": 1.0, "threshold": 2.5, "n_queries": 300, "n_candidates": 20,
+ "budgets": [0.1, 0.2, 0.3, 0.5, 1.0], "out": "results/qmof_main"}
