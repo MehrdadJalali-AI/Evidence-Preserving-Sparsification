@@ -30,12 +30,14 @@ The runner verifies SHA-256 `9991b2d51d71a6cc4c97affd8ca36ac18d5b75554b4f3f1ac9e
 
 ## Reproduce the principal results (~4 min, one core)
 ```bash
+python3.11 -m pip install -r requirements-results.txt -e ".[test]"
 bash scripts/reproduce.sh
 ```
 This runs 3 seeds x 300 queries (main setting, contradiction threshold 1.0 eV) and one seed at
 0.5 and 1.5 eV, then writes `results/<run>/analysis/` (summary with bootstrap CIs, McNemar tests,
 budget-to-95%, sensitivity, LaTeX tables, trade-off figure) and the real-query example figure.
-The runner is resumable: rerunning continues after the last completed query.
+The runner is resumable: rerunning continues after the last completed query. The result environment
+is pinned because the cross-fitted prediction model is sensitive to library-version changes.
 
 ## Layout
 | Path | Content |

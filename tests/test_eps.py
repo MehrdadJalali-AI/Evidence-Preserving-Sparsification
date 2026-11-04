@@ -47,6 +47,30 @@ def test_exclusion_unit_never_uses_claims(setup):
                 assert not g.has_dft(u["cand"], q["cond"])
 
 
+def test_contradiction_units_include_the_anchor_and_contradicted_claim(setup):
+    _, _, g, qs = setup
+    for q in qs:
+        for u in audit_units(g, q):
+            if u["kind"] == "contradiction":
+                assert f"M:{u['cand']}" in u["nodes"]
+                assert u["parent"] in u["nodes"]
+
+
+def test_certificate_shared_nodes_do_not_make_a_unit_partial(setup):
+    _, _, g, qs = setup
+    for q in qs:
+        units = audit_units(g, q)
+        contra = next((u for u in units if u["kind"] == "contradiction"), None)
+        if contra is None:
+            continue
+        support = next(u for u in units if u["kind"] == "support" and u["cand"] == contra["cand"])
+        status = certificate(units, set(support["nodes"]))["units"]
+        record = next(x for x in status if x["kind"] == "contradiction" and x["cand"] == contra["cand"])
+        assert record["status"] == "omitted"
+        return
+    pytest.fail("synthetic graph did not contain a contradiction unit")
+
+
 def test_units_inside_neighbourhood(setup):
     _, _, g, qs = setup
     for q in qs:

@@ -113,10 +113,12 @@ def main(argv=None):
     cols = ["correct_conservative", "answered_conservative", "audit_sufficient", "replay_ok", "correct_permissive", "unsupported_rate_perm", "contra_ret", "size", "edges"]
     heads = ["Correct", "Coverage", "Audit-suff.", "Replay", "Correct (perm.)", "Unsupp.\\ (perm.)", "Contra.", "Nodes", "Edges"]
     open(os.path.join(out, "table_main.tex"), "w").write(tex_table(S, ["Full neighbourhood"] + SHOW, 0.3, cols, heads, cap, "tab:main"))
-    cols2 = ["correct_conservative", "answered_conservative", "audit_sufficient", "replay_ok", "correct_permissive", "unmet_R4", "unmet_R2x", "size"]
-    heads2 = ["Correct", "Coverage", "Audit-suff.", "Replay", "Correct (perm.)", "R4 unmet", "R2x unmet", "Nodes"]
+    cols2 = ["correct_conservative", "answered_conservative", "audit_sufficient", "replay_ok", "correct_permissive",
+             "unmet_R1", "unmet_R2", "unmet_R3", "unmet_R4", "unmet_R5", "unmet_R2x", "size"]
+    heads2 = ["Correct", "Coverage", "Audit-suff.", "Replay", "Correct (perm.)",
+              "R1 unmet", "R2 unmet", "R3 unmet", "R4 unmet", "R5 unmet", "R2x unmet", "Nodes"]
     open(os.path.join(out, "table_ablation.tex"), "w").write(tex_table(S, ABL, 1.0, cols2, heads2,
-        "Ablations without budget pressure ($k$ = 100\\% of the neighbourhood). Means; bracketed: bootstrap 95\\% CI.", "tab:abl"))
+        "Ablations without budget pressure ($k$ = 100\\% of the neighbourhood). Means; bracketed: bootstrap 95\\% CI. Requirement scoring is per unit: an incomplete support unit marks all of R1, R2, R3, and R5 unmet.", "tab:abl"))
     if sweeps:
         rows = []
         for sd in [d] + sweeps:

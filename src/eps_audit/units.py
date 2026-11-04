@@ -4,7 +4,7 @@ Canonical selection sigma(q): for every candidate m and requested level f
   * if the snapshot holds a DFT claim C:m:f  -> one SUPPORT unit
         {M:m, C:m:f, E:m:f, K:m:f, Q:m:f, P:snapshot, D:extract:f}       (R1, R2, R3, R5)
     and, for every claim contradicting C:m:f, one CONTRADICTION unit
-        {c', E', K', Q', P:model, D:model}                                 (R4)
+        {M:m, C:m:f, c', E', K', Q', P:model, D:model}                     (R4)
     Each claim has exactly one evidence record in this graph; if several existed, sigma
     would select the lexicographically smallest record id (deterministic).
   * otherwise -> one EXCLUSION unit {M:m, X:m:f, P:snapshot, D:lookup:f}    (R2 closed-world)
@@ -60,7 +60,7 @@ def audit_units(g, q, contra=True):
                 for cc in sorted(g.contra[c]):
                     t = cc.split(":", 2)[2]
                     units.append(dict(kind="contradiction", cand=m, value=sup["value"], parent=c,
-                                      nodes=frozenset({cc, f"E:{m}:{t}", f"K:{m}:{t}", f"Q:{m}:{t}",
+                                      nodes=frozenset({f"M:{m}", c, cc, f"E:{m}:{t}", f"K:{m}:{t}", f"Q:{m}:{t}",
                                                        "P:model", "D:model"})))
         else:
             units.append(dict(kind="exclusion", cand=m, value=None, parent=None,
@@ -74,11 +74,17 @@ def justification(units):
 
 def certificate(units, S):
     """Per-unit status and unmet requirements for a retained node set S.
-    status: complete | omitted (no node of the unit except shared hubs/material) | partial."""
+    status: complete | omitted (no own node retained) | partial.
+
+    An own node is a node in the unit that is neither an anchor material nor in any
+    other unit. Thus, shared nodes alone cannot make a unit partial.
+    """
     out, unmet = [], set()
-    for u in units:
+    anchors = {n for u in units for n in u["nodes"] if n.startswith("M:")}
+    for i, u in enumerate(units):
         missing = sorted(u["nodes"] - S)
-        own = {n for n in u["nodes"] if n[0] not in "PDM"}
+        other_nodes = set().union(*(v["nodes"] for j, v in enumerate(units) if j != i))
+        own = set(u["nodes"]) - (anchors | other_nodes)
         status = "complete" if not missing else ("omitted" if not (own & S) else "partial")
         if missing:
             unmet.update(REQS[u["kind"]])

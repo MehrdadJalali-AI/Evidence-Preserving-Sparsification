@@ -1,0 +1,8 @@
+# Exact environment used to reproduce the released QMOF outputs.
+# Install with Python 3.11 before running scripts/reproduce.sh.
+numpy==2.4.6
+pandas==3.1.0
+scipy==1.17.1
+scikit-learn==1.9.1
+matplotlib==3.11.2
+networkx==3.6.1

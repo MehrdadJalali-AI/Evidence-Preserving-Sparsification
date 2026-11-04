@@ -1,13 +1,13 @@
 \begin{table*}[t]\centering\footnotesize
-\caption{Ablations without budget pressure ($k$ = 100\% of the neighbourhood). Means; bracketed: bootstrap 95\% CI.}\label{tab:abl}
+\caption{Ablations without budget pressure ($k$ = 100\% of the neighbourhood). Means; bracketed: bootstrap 95\% CI. Requirement scoring is per unit: an incomplete support unit marks all of R1, R2, R3, and R5 unmet.}\label{tab:abl}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{lcccccccc}\toprule
-Method & Correct & Coverage & Audit-suff. & Replay & Correct (perm.) & R4 unmet & R2x unmet & Nodes\\\midrule
-EPS & 1.00 [1.00, 1.00] & 1.00 & 1.00 & 1.00 & 1.00 [1.00, 1.00] & 0.00 & 0.00 & 76 \\
-EPS-noCond & 0.00 [0.00, 0.00] & 0.00 & 0.00 & 0.00 & 1.00 [1.00, 1.00] & 0.16 & 0.00 & 65 \\
-EPS-noQual & 0.00 [0.00, 0.00] & 0.00 & 0.00 & 0.00 & 0.97 [0.96, 0.98] & 0.16 & 0.00 & 65 \\
-EPS-noProv & 1.00 [1.00, 1.00] & 1.00 & 0.00 & 0.00 & 1.00 [1.00, 1.00] & 0.16 & 1.00 & 62 \\
-EPS-noContra & 0.94 [0.93, 0.96] & 1.00 & 0.84 & 0.94 & 0.94 [0.93, 0.96] & 0.16 & 0.00 & 75 \\
-EPS-noExcl & 1.00 [1.00, 1.00] & 1.00 & 0.00 & 0.00 & 1.00 [1.00, 1.00] & 0.00 & 1.00 & 66 \\
+\begin{tabular}{lcccccccccccc}\toprule
+Method & Correct & Coverage & Audit-suff. & Replay & Correct (perm.) & R1 unmet & R2 unmet & R3 unmet & R4 unmet & R5 unmet & R2x unmet & Nodes\\\midrule
+EPS & 1.00 [1.00, 1.00] & 1.00 & 1.00 & 1.00 & 1.00 [1.00, 1.00] & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 76 \\
+EPS-noCond & 0.00 [0.00, 0.00] & 0.00 & 0.00 & 0.00 & 1.00 [1.00, 1.00] & 1.00 & 1.00 & 1.00 & 0.16 & 1.00 & 0.00 & 65 \\
+EPS-noQual & 0.00 [0.00, 0.00] & 0.00 & 0.00 & 0.00 & 0.97 [0.96, 0.98] & 1.00 & 1.00 & 1.00 & 0.16 & 1.00 & 0.00 & 65 \\
+EPS-noProv & 1.00 [1.00, 1.00] & 1.00 & 0.00 & 0.00 & 1.00 [1.00, 1.00] & 1.00 & 1.00 & 1.00 & 0.16 & 1.00 & 1.00 & 62 \\
+EPS-noContra & 0.94 [0.93, 0.96] & 1.00 & 0.84 & 0.94 & 0.94 [0.93, 0.96] & 0.00 & 0.00 & 0.00 & 0.16 & 0.00 & 0.00 & 75 \\
+EPS-noExcl & 1.00 [1.00, 1.00] & 1.00 & 0.00 & 0.00 & 1.00 [1.00, 1.00] & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 1.00 & 66 \\
 \bottomrule\end{tabular}}
 \end{table*}
