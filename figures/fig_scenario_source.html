@@ -206,14 +206,14 @@ function buildGraph(){
         units.push({kind:"contradiction",mof:m,value:r[2],nodes:[`M:${m}`,`C:${m}:hse`,`C:${m}:ml`,`E:${m}:ml`,`K:${m}:ml`,`Q:${m}:ml`,"P:model","D:model"]});
       }
     } else {
-      [x,y]=rot(0.18,78); add(`X:${m}`,"X",x,y,"X",`Exclusion record: no HSE06 value for MOF ${m} in the snapshot`,{mof:m});
+      [x,y]=rot(0.34,80); add(`X:${m}`,"X",x,y,"X",`Exclusion record: no HSE06 value for MOF ${m} in the snapshot`,{mof:m});
       E(`M:${m}`,`X:${m}`); E(`X:${m}`,"D:look"); E(`X:${m}`,"P:snap");
       units.push({kind:"exclusion",mof:m,nodes:[`M:${m}`,`X:${m}`,"P:snap","D:look"]});
     }
     // structural context: similar MOF + shared linker (central, but useless for the audit)
     [x,y]=rot(Math.PI/6,128); add(`Z:sim${m}`,"Z",x,y,"",`Context: structurally similar MOF (shares topology with ${m} and ${NAMES[(i+1)%6]})`);
     E(`M:${m}`,`Z:sim${m}`); E(`Z:sim${m}`,`M:${NAMES[(i+1)%6]}`);
-    [x,y]=rot(-0.05,78); add(`Z:lnk${m}`,"Z",x,y,"",`Context: linker fragment of MOF ${m}`);
+    [x,y]=rot(-0.32,84); add(`Z:lnk${m}`,"Z",x,y,"",`Context: linker fragment of MOF ${m}`);
     E(`M:${m}`,`Z:lnk${m}`); E(`Z:lnk${m}`,"P:snap");
   });
   add("Z:metal","Z",cx-2,cy+66,"","Context: shared metal node (Zn), very high degree");
@@ -275,7 +275,7 @@ const sig=r=>r.answered?r.res.map(x=>`${x.mof}${x.contested?"*":""}`).join(","):
 function fmt(r){
   if(!r.answered) return `Abstains (${r.why})`;
   if(!r.res.length) return "No MOF qualifies";
-  return r.res.map(x=>`MOF ${x.mof}: ${x.value} eV (${x.src})${x.contested?" ⚠ contested":""}`).join("; ");
+  return r.res.map(x=>`MOF ${x.mof}: ${x.value.toFixed(2)} eV (${x.src})${x.contested?" ⚠ contested":""}`).join("; ");
 }
 
 // ------------------------------------------------------------------ audit
@@ -311,7 +311,7 @@ function draw(svg,S,unitsOn){
       if(!own.every(n=>S.has(n))) return;
       const xs=own.map(n=>G.nodes[n].x), ys=own.map(n=>G.nodes[n].y);
       const c=u.kind==="support"?"#1e8449":u.kind==="contradiction"?"#c0392b":"#7f8c8d";
-      el('rect',{x:Math.min(...xs)-13,y:Math.min(...ys)-13,width:Math.max(...xs)-Math.min(...xs)+26,height:Math.max(...ys)-Math.min(...ys)+26,rx:14,
+      el('rect',{x:Math.min(...xs)-17,y:Math.min(...ys)-17,width:Math.max(...xs)-Math.min(...xs)+34,height:Math.max(...ys)-Math.min(...ys)+34,rx:16,
         fill:c,"fill-opacity":.08,stroke:c,"stroke-dasharray":"4 3","stroke-width":1.2},gH);
     });
   }
@@ -322,13 +322,15 @@ function draw(svg,S,unitsOn){
   });
   Object.values(G.nodes).forEach(n=>{
     const on=S.has(n.id), g=el('g',{class:'node'+(on?'':' faded'),"data-id":n.id,style:"cursor:pointer"},gN);
-    if(n.t==="M"){ mofIcon(g,n.x,n.y,22,true); el('text',{x:n.x-13,y:n.y-10,"font-size":12,"font-weight":800,"text-anchor":"end",fill:"#1d2330",stroke:"#fff","stroke-width":3.5,"paint-order":"stroke"},g).textContent=n.label; }
-    else if(n.t==="X"){ el('rect',{x:n.x-8,y:n.y-8,width:16,height:16,rx:2,fill:COL.X,stroke:"#fff","stroke-width":1.2},g); el('text',{x:n.x,y:n.y+4,"font-size":10,"font-weight":700,fill:"#fff","text-anchor":"middle"},g).textContent="X"; }
-    else { const r=n.t==="Z"?5:(n.t==="P"||n.t==="D"?10:8.5); el('circle',{cx:n.x,cy:n.y,r,fill:COL[n.t],stroke:"#fff","stroke-width":1.2},g);
-      if(n.label) el('text',{x:n.x,y:n.y+3.5,"font-size":9.5,"font-weight":700,fill:"#fff","text-anchor":"middle"},g).textContent=n.label; }
+    if(n.t==="M"){ mofIcon(g,n.x,n.y,27,true); const dx_=280-n.x, dy_=240-n.y, l_=Math.hypot(dx_,dy_)||1, o_=Math.abs(dy_)>Math.abs(dx_)?(dy_<0?36:31):29, lx_=n.x+dx_/l_*o_, ly_=n.y+dy_/l_*o_+7; el('rect',{x:lx_-8,y:ly_-15,width:16,height:19,rx:3,fill:"#fff","fill-opacity":.9},g); el('text',{x:lx_,y:ly_,"font-size":19,"font-weight":700,"text-anchor":"middle",fill:"#1d2330"},g).textContent=n.label; }
+    else if(n.t==="X"){ el('rect',{x:n.x-12.5,y:n.y-12.5,width:25,height:25,rx:3,fill:COL.X,stroke:"#fff","stroke-width":1.4},g); el('text',{x:n.x,y:n.y+6,"font-size":17,"font-weight":700,fill:"#fff","text-anchor":"middle"},g).textContent="X"; }
+    else { const r=n.t==="Z"?6.5:(n.t==="P"||n.t==="D"?14.5:13); el('circle',{cx:n.x,cy:n.y,r,fill:COL[n.t],stroke:"#fff","stroke-width":1.4},g);
+      if(n.label) el('text',{x:n.x,y:n.y+6,"font-size":17,"font-weight":700,fill:"#fff","text-anchor":"middle"},g).textContent=n.label; }
     g.addEventListener('mousemove',ev=>{tip.innerHTML=`<b>${n.id}</b><br>${n.desc}${on?"":"<br><i>not kept</i>"}`;tip.style.left=(ev.clientX+14)+'px';tip.style.top=(ev.clientY+12)+'px';tip.style.opacity=1});
     g.addEventListener('mouseleave',()=>tip.style.opacity=0);
-  });
+  });  const P=Object.values(G.nodes), xs=P.map(n=>n.x), ys=P.map(n=>n.y), pad=20;
+  const x0=Math.min(...xs)-pad-34, y0=Math.min(...ys)-pad, w=Math.max(...xs)-Math.min(...xs)+2*pad+34, h=Math.max(...ys)-Math.min(...ys)+2*pad;
+  svg.setAttribute('viewBox',`${x0} ${y0} ${w} ${h}`);
 }
 
 // ------------------------------------------------------------------ panels
