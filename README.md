@@ -1,6 +1,6 @@
-# Evidence-Preserving Sparsification (EPS)
+# Evidence-Preserving Sparsification (EPS)#
 <p align="center">
-  <img src="EPS.jpg" alt="Evidence-Preserving Sparsification (EPS)" width="30%">
+  <img src="EPS.jpg" alt="Evidence-Preserving Sparsification (EPS)" width="50%">
 </p>
 Reference implementation and reproducibility package for
 
