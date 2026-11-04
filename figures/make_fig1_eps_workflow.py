@@ -82,13 +82,40 @@ for (x, _, _, _), s in zip((PA, PB, PC), ("a   Ask and formalize", "b   Preserve
     T(x + 1.8, 94.6, s, size=FSH, weight="bold")
 
 
-def G(pos, edges, dashed=(), r=1.25, sq=("X",), lw=0.7):
+def mof(x, y, s=3.0, z=6, faded=False):
+    """Framework icon (cube of metal clusters joined by linkers, with a pore)."""
+    lc, mc, oc = ("#C9CED4", "#DDE1E5", "#E8EAED") if faded else ("#55657A", "#2E6F9E", "#C8833A")
+    d = .42 * s; w_ = s - d / 2
+    F = [(x - s/2, y - s/2), (x - s/2 + w_, y - s/2), (x - s/2 + w_, y - s/2 + w_), (x - s/2, y - s/2 + w_)]
+    B = [(px + d/2, py + d/2) for px, py in F]
+    ax.add_patch(Rectangle(F[0], w_, w_, fc="white", ec="none", zorder=z - .4))
+    for poly in (B, F):
+        ax.plot([p[0] for p in poly + poly[:1]], [p[1] for p in poly + poly[:1]], color=lc, lw=.55, zorder=z)
+    for a_, b_ in zip(F, B):
+        ax.plot([a_[0], b_[0]], [a_[1], b_[1]], color=lc, lw=.55, zorder=z)
+    for px, py in F + B:
+        ax.add_patch(Rectangle((px - .12*s, py - .12*s), .24*s, .24*s, fc=mc, ec="white", lw=.2, zorder=z + .5))
+    ax.add_patch(Circle((x + d/4 - .05, y + d/4 - .05), .15 * s, fc=oc, ec="none", zorder=z + .2))
+
+
+def hull(pts, color, pad=2.0, alpha=.10):
+    from scipy.spatial import ConvexHull
+    ring_ = [(px + pad * math.cos(t), py + pad * math.sin(t)) for px, py in pts for t in [i * math.pi / 9 for i in range(18)]]
+    h_ = ConvexHull(ring_); P_ = [ring_[i] for i in h_.vertices]
+    ax.add_patch(Polygon(P_, closed=True, fc=color, ec="none", alpha=alpha, zorder=1.5))
+    ax.add_patch(Polygon(P_, closed=True, fc="none", ec=color, lw=.7, ls=(0, (2.2, 1.3)), zorder=1.6))
+
+
+def G(pos, edges, dashed=(), r=1.25, sq=("X",), lw=0.7, ms=3.2):
     for a_, b_ in edges:
         line(*zip(pos[a_], pos[b_]), color=COL["mute"], lw=lw, z=4)
     for a_, b_ in dashed:
         line(*zip(pos[a_], pos[b_]), color=COL["red"], lw=1.0, dashed=True, z=4)
     for k_, (x0, y0) in pos.items():
-        chip(x0, y0, k_[0], r=r, square=k_[0] in sq)
+        if k_[0] == "M":
+            mof(x0, y0, s=ms)
+        else:
+            chip(x0, y0, k_[0], r=r, square=k_[0] in sq)
 
 # ---------------------------------------------------------------- panel a
 sx, sy = 6.6, 79.5
@@ -109,23 +136,40 @@ T(25, 57.6, "Parse + schema check", size=FS, weight="bold", ha="center")
 T(25, 53.8, "(LLM parser optional)", size=FS, color=COL["mute"], ha="center")
 arrow((25, 66.3), (25, 61.1)); arrow((25, 50.4), (25, 42.1))
 box(4, 21.0, 42, 21.0, fc="white", ec=COL["ink"], lw=1.1, r=2)
-T(25, 35.0, r"$q = (\mathrm{argmax},\ \mathrm{HSE06},\ C,\ k)$", size=FSL, weight="bold", ha="center")
-T(25, 27.0, "operation · condition ·\ncandidates · node budget", size=FS, color=COL["mute"], ha="center")
+T(25, 35.0, r"$q = (\mathrm{argmax},\ \mathrm{HSE06},\ C)$", size=FSL, weight="bold", ha="center")
+T(25, 27.0, "operation · level of theory ·\ncandidate set", size=FS, color=COL["mute"], ha="center")
 
 # ---------------------------------------------------------------- panel b
-gx, gy = 60.3, 72.5                                   # query neighbourhood graph (larger, typed)
-ring = [(gx + 9.0 * math.cos(2 * math.pi * i / 12 + 0.2), gy + 13.0 * math.sin(2 * math.pi * i / 12 + 0.2)) for i in range(12)]
-core = {"M": (gx, gy), "C1": (gx - 4.2, gy + 4.6), "C2": (gx + 4.4, gy + 4.2), "E": (gx - 5.6, gy - 1.6),
-        "K": (gx - 1.2, gy + 9.0), "Q": (gx + 5.4, gy - 2.4), "P": (gx + 1.2, gy - 6.8), "D": (gx - 3.6, gy - 7.0)}
-for (x0, y0) in ring:
-    line([x0, gx], [y0, gy], color=COL["paleE"], lw=0.5)
-for (x0, y0) in ring:
-    pale(x0, y0, 1.05)
-G(core, [("M", "C1"), ("M", "C2"), ("C1", "E"), ("C1", "K"), ("C2", "Q"), ("E", "D"), ("D", "P"), ("Q", "P")], dashed=[("C1", "C2")], r=1.55)
-T(gx, 56.6, "N(q)", size=FS, color=COL["mute"], ha="center")
-arrow((46.1, 28.0), (60, 28.0), lw=1.5); line([60, 60], [28.0, 52.0], lw=1.5); arrow((60, 51.9), (60, 54.4), lw=1.5)
-T(61.3, 36, "q, k", size=FS, color=COL["mute"])
-arrow((69.0, 73), (70.0, 73), lw=1.2)
+gx, gy = 60.0, 73.0                                   # query neighbourhood: three candidate clusters + context
+from matplotlib.patches import Ellipse
+ax.add_patch(Ellipse((gx, gy), 19.0, 31.5, fc="white", ec=COL["paleE"], lw=.8, ls=(0, (2.2, 1.4)), zorder=1))
+ctx = [(gx - 6.5, gy + 12.5), (gx + 6.0, gy + 12.0), (gx - 8.0, gy + 3.0), (gx + 8.2, gy + 6.0), (gx - 8.0, gy - 6.0),
+       (gx + 7.8, gy - 8.5), (gx - 4.5, gy - 13.0), (gx + 3.5, gy - 13.8), (gx + 0.5, gy + 15.0)]
+cl = {"Ma": (gx - 2.5, gy + 9.5), "Mb": (gx + 4.2, gy + 0.5), "Mc": (gx - 2.0, gy - 9.0)}
+typed = {"Ca": (gx - 5.0, gy + 6.2), "Ka": (gx - 6.6, gy + 9.4), "Qa": (gx + 1.0, gy + 12.0), "Ea": (gx - 4.6, gy + 2.2),
+         "Cb": (gx + 4.6, gy + 5.2), "Qb": (gx + 7.6, gy + 1.8), "Eb": (gx + 4.4, gy - 4.0),
+         "Xc": (gx + 1.6, gy - 11.2), "P": (gx - 0.6, gy - 1.6), "D": (gx - 5.4, gy - 3.6)}
+for i, (x0, y0) in enumerate(ctx):                    # context mesh (similar MOFs, linkers, other levels)
+    for j in (i + 1, i + 2):
+        if j < len(ctx) and math.dist((x0, y0), ctx[j]) < 11:
+            line([x0, ctx[j][0]], [y0, ctx[j][1]], color=COL["paleE"], lw=.45, z=2)
+for (x0, y0) in ctx:
+    m_ = min(list(cl.values()) + list(typed.values()), key=lambda p: math.dist(p, (x0, y0)))
+    line([x0, m_[0]], [y0, m_[1]], color=COL["paleE"], lw=.45, z=2)
+    pale(x0, y0, .95)
+allp = {**cl, **typed}
+for a_, b_ in (("Ma", "Ca"), ("Ca", "Ka"), ("Ca", "Qa"), ("Ca", "Ea"), ("Ea", "P"), ("Ea", "D"), ("Mb", "Cb"), ("Cb", "Qb"),
+               ("Cb", "Eb"), ("Eb", "P"), ("Mc", "Xc"), ("Xc", "P"), ("Mc", "D")):
+    line(*zip(allp[a_], allp[b_]), color=COL["mute"], lw=.6, z=3)
+line(*zip(typed["Ca"], typed["Cb"]), color=COL["red"], lw=.9, dashed=True, z=3)
+for k_, (x0, y0) in cl.items():
+    mof(x0, y0, s=2.9)
+for k_, (x0, y0) in typed.items():
+    chip(x0, y0, k_[0], r=1.2, square=k_[0] == "X")
+T(gx, 55.0, "N(q)", size=FS, color=COL["mute"], ha="center")
+arrow((46.1, 28.0), (60, 28.0), lw=1.5); line([60, 60], [28.0, 50.5], lw=1.5); arrow((60, 50.4), (60, 53.0), lw=1.5)
+T(53.6, 30.6, "q, k", size=FS, color=COL["mute"], ha="center")
+arrow((69.6, 73), (70.5, 73), lw=1.2)
 cx0, cw = 70.6, 34
 # support unit as a small graph
 box(cx0, 71.5, cw, 17.0, fc="white", ec=COL["C"], lw=1.0)
@@ -158,12 +202,19 @@ T(PB[0] + PB[2] / 2, 19.5, "Compression occurs at audit-unit boundaries.", size=
 # ---------------------------------------------------------------- panel c
 box(124.5, 61.0, 49.5, 31.0, fc="white", ec=COL["C"], lw=1.0)
 T(126.2, 89.3, "Compact subgraph S", size=FS, weight="bold")
-sp = {"M": (130.0, 71.0), "C1": (137.0, 77.0), "E1": (143.0, 82.5), "K1": (131.0, 81.5), "Q1": (143.5, 72.5), "D1": (149.0, 79.0),
-      "P1": (153.0, 85.5), "C2": (158.5, 74.0), "E2": (164.5, 80.0), "K2": (168.5, 70.5), "Q2": (161.0, 66.5), "D2": (170.0, 77.0),
-      "P2": (169.5, 85.5), "X": (136.5, 64.5), "D3": (144.5, 63.5)}
-G(sp, [("M", "C1"), ("C1", "E1"), ("C1", "K1"), ("C1", "Q1"), ("E1", "D1"), ("D1", "P1"), ("E1", "P1"), ("M", "C2"),
-       ("C2", "E2"), ("C2", "K2"), ("C2", "Q2"), ("E2", "D2"), ("D2", "P2"), ("E2", "P2"), ("M", "X"), ("X", "D3"), ("D3", "P1")],
-  dashed=[("C1", "C2")], r=1.65)
+sup = {"ME": (130.5, 76.0), "C1": (136.5, 79.5), "E1": (142.5, 83.5), "K1": (131.5, 84.0), "Q1": (137.0, 72.5), "D1": (144.0, 77.0)}
+con = {"C2": (150.0, 71.0), "E2": (156.5, 75.0), "K2": (157.0, 67.0), "Q2": (150.5, 64.5), "D2": (163.0, 72.5), "P2": (168.5, 77.0)}
+exc = {"MC": (158.5, 86.0), "X": (164.5, 86.0), "D3": (170.0, 82.5)}
+hub = {"P1": (150.5, 86.5)}
+hull(list(sup.values()), COL["ok"]); hull(list(con.values()), COL["red"]); hull(list(exc.values()), COL["X"], pad=1.9)
+sp = {**sup, **con, **exc, **hub}
+G(sp, [("ME", "C1"), ("C1", "E1"), ("C1", "K1"), ("C1", "Q1"), ("E1", "D1"), ("E1", "P1"), ("D1", "P1"),
+       ("C2", "E2"), ("C2", "K2"), ("C2", "Q2"), ("E2", "D2"), ("D2", "P2"), ("E2", "P2"),
+       ("MC", "X"), ("X", "D3"), ("D3", "P1"), ("X", "P1")],
+  dashed=[("C1", "C2")], r=1.5, ms=3.4)
+T(126.6, 64.5, "support", size=6.6, color=COL["ok"], weight="bold")
+T(165.5, 63.2, "contradiction", size=6.6, color=COL["red"], weight="bold", ha="center")
+T(164.5, 90.0, "exclusion", size=6.6, color=COL["X"], weight="bold", ha="center")
 arrow((118.1, 80.0), (124.4, 80.0), lw=1.5)
 box(124.5, 44.0, 49.5, 14.6, fc="white", ec=COL["ok"], lw=1.0)
 T(126.2, 56.3, "Audit certificate", size=FS, weight="bold", color=COL["ok"])
@@ -194,7 +245,7 @@ def TW(x, y, lab):
 y1, y2, GAP = 9.2, 4.6, 2.5
 x = 3.5
 for t, lab in (("M", "material"), ("C", "claim"), ("E", "evidence"), ("K", "condition"), ("Q", "qualification"), ("P", "provenance")):
-    chip(x, y1, t, r=1.2); x += 1.8 + TW(x + 1.8, y1, lab) + GAP
+    (mof(x, y1, s=2.7) if t == "M" else chip(x, y1, t, r=1.2)); x += 1.8 + TW(x + 1.8, y1, lab) + GAP
 pale(x, y1, 1.1); TW(x + 1.8, y1, "not retained")
 x = 3.5
 for t, lab in (("D", "derivation"), ("X", "exclusion record")):
