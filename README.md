@@ -1,5 +1,7 @@
 # Evidence-Preserving Sparsification (EPS)
-
+<p align="center">
+  <img src="EPS.jpg" alt="Evidence-Preserving Sparsification (EPS)" width="30%">
+</p>
 Reference implementation and reproducibility package for
 
 > M. Jalali and M. H. Nadimi-Shahraki, *Evidence-Preserving Knowledge Graph Sparsification for Auditable AI in Materials Discovery* (manuscript in preparation for *Discover Informatics*).
