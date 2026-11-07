@@ -6,8 +6,10 @@ import numpy as np, pandas as pd
 from scipy.stats import binomtest
 
 RNG = np.random.default_rng(0)
-SHOW = ["EPS", "Conflict-free (CONSIST-inspired)", "Condition-aware closure", "Type-aware closure",
-        "PPR relevance", "Degree", "Random"]
+SHOW = ["EPS", "Conflict-free (CONSIST-inspired)", "Condition-aware closure", "Exclusion-aware closure",
+        "Type-aware closure", "PPR relevance", "Degree", "Random"]
+TIGHT = ["EPS", "EPS (cost-first order)", "Conflict-free (CONSIST-inspired)", "Exclusion-aware closure", "Condition-aware closure"]
+HSE = ["EPS", "EPS-noContra", "Conflict-free (CONSIST-inspired)", "Exclusion-aware closure", "Condition-aware closure", "PPR relevance"]
 ABL = ["EPS", "EPS-noCond", "EPS-noQual", "EPS-noProv", "EPS-noContra", "EPS-noExcl"]
 
 
@@ -33,7 +35,9 @@ def ci(x, B=2000):
 
 METRICS = ["correct_conservative", "answered_conservative", "correct_permissive", "audit_sufficient",
            "support_cov", "exclusion_cov", "unsupported_rate", "unsupported_rate_perm", "contra_ret",
-           "replay_ok", "size", "edges", "unmet_R1", "unmet_R2", "unmet_R3", "unmet_R4", "unmet_R5", "unmet_R2x"]
+           "replay_ok", "size", "edges", "unmet_R1", "unmet_R2", "unmet_R3", "unmet_R4", "unmet_R5", "unmet_R2x",
+           "correct_claimfilter", "answered_claimfilter", "indep_audit", "qual_correct", "qual_flagged", "qual_unaccounted",
+           "n_units_complete", "ilp_units", "n_units"]
 
 
 def summarize(df):
@@ -61,7 +65,7 @@ def mcnemar(df, col, b=0.3):
     return pd.DataFrame(out)
 
 
-CI_COLS = {"correct_conservative", "correct_permissive"}
+CI_COLS = {"correct_conservative", "correct_permissive", "correct_claimfilter"}
 
 
 def fmt(r, k, d=2):
@@ -81,7 +85,7 @@ def tex_table(S, names, b, cols, heads, cap, lab):
 
 def figure(S, path):
     import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
-    col = ["#1b6ca8", "#7b2cbf", "#264653", "#2a9d8f", "#d1495b", "#edae49", "#66a182"]
+    col = ["#1b6ca8", "#7b2cbf", "#264653", "#e76f51", "#2a9d8f", "#d1495b", "#edae49", "#66a182"]
     fig, ax = plt.subplots(1, 4, figsize=(15, 3.7))
     panels = [("correct_conservative", "Correct (conservative reader)"), ("answered_conservative", "Answer coverage (conservative)"),
               ("audit_sufficient", "Audit-sufficient (R1–R5, R2x)"), ("correct_permissive", "Correct (permissive reader)")]
@@ -93,7 +97,7 @@ def figure(S, path):
             a.set_title(lab, fontsize=11.5); a.set_ylim(-0.03, 1.03); a.grid(alpha=.3)
             a.set_xlabel("Budget k (% of query neighbourhood)", fontsize=9.7); a.tick_params(labelsize=9.5)
     h, l = ax[0].get_legend_handles_labels()
-    fig.legend(h, l, loc="lower center", ncol=7, fontsize=9.2, frameon=False)
+    fig.legend(h, l, loc="lower center", ncol=8, fontsize=9.2, frameon=False)
     fig.tight_layout(rect=(0, 0.08, 1, 1)); fig.savefig(path + ".pdf"); fig.savefig(path + ".png", dpi=170)
 
 
@@ -109,9 +113,11 @@ def main(argv=None):
     nq = df.groupby("seed").qid.nunique().sum()
     cap = (f"Full QMOF ({metas[0]['n_materials']:,} MOFs), {len(metas)} seeds, {nq} queries, budget $k$ = 30\\% of the query neighbourhood "
            "(Full neighbourhood: unreduced). Means; bracketed: bootstrap 95\\% CI. Correct and coverage use the conservative reader; "
-           "Unsupp.\\ and Contra.\\ use the denominators defined in Section~\\ref{sec:case}.")
-    cols = ["correct_conservative", "answered_conservative", "audit_sufficient", "replay_ok", "correct_permissive", "unsupported_rate_perm", "contra_ret", "size", "edges"]
-    heads = ["Correct", "Coverage", "Audit-suff.", "Replay", "Correct (perm.)", "Unsupp.\\ (perm.)", "Contra.", "Nodes", "Edges"]
+           "Correct (filter) uses the claim-filtering reader; Indep.\\ audit is the method-independent auditor; nodes and edges are rounded "
+           "to the nearest integer. Unsupp.\\ and Claim-pair contra.\\ use the denominators defined in Section~\\ref{sec:case}; "
+           "Claim-pair contra.\\ counts only retained claim-node pairs, not complete R4 units.")
+    cols = ["correct_conservative", "answered_conservative", "correct_claimfilter", "audit_sufficient", "indep_audit", "replay_ok", "correct_permissive", "unsupported_rate_perm", "contra_ret", "size", "edges"]
+    heads = ["Correct", "Coverage", "Correct (filter)", "Audit-suff.", "Indep.\\ audit", "Replay", "Correct (perm.)", "Unsupp.\\ (perm.)", "Claim-pair contra.", "Nodes", "Edges"]
     open(os.path.join(out, "table_main.tex"), "w").write(tex_table(S, ["Full neighbourhood"] + SHOW, 0.3, cols, heads, cap, "tab:main"))
     cols2 = ["correct_conservative", "answered_conservative", "audit_sufficient", "replay_ok", "correct_permissive",
              "unmet_R1", "unmet_R2", "unmet_R3", "unmet_R4", "unmet_R5", "unmet_R2x", "size"]
@@ -119,6 +125,41 @@ def main(argv=None):
               "R1 unmet", "R2 unmet", "R3 unmet", "R4 unmet", "R5 unmet", "R2x unmet", "Nodes"]
     open(os.path.join(out, "table_ablation.tex"), "w").write(tex_table(S, ABL, 1.0, cols2, heads2,
         "Ablations without budget pressure ($k$ = 100\\% of the neighbourhood). Means; bracketed: bootstrap 95\\% CI. Requirement scoring is per unit: an incomplete support unit marks all of R1, R2, R3, and R5 unmet.", "tab:abl"))
+    # HSE06-stratified table (beta = 0.3): all HSE06 queries and the contested subset
+    h = df[(df.cond == "hse06") & (df.budget == 0.3)]
+    nh, nc = h.drop_duplicates(["seed", "qid"]).shape[0], h[h.contested_ref == 1].drop_duplicates(["seed", "qid"]).shape[0]
+    lines = []
+    for m in HSE:
+        a_, c_ = h[h.method == m], h[(h.method == m) & (h.contested_ref == 1)]
+        lines.append(f"{m} & {a_.correct_conservative.mean():.2f} & {a_.audit_sufficient.mean():.2f} & {a_.indep_audit.mean():.2f} & "
+                     f"{c_.correct_conservative.mean():.2f} & {c_.audit_sufficient.mean():.2f} & {a_['size'].mean():.0f} \\\\")
+    open(os.path.join(out, "table_hse06.tex"), "w").write(
+        "\\begin{table}[t]\\centering\\footnotesize\n\\caption{HSE06 queries only, budget $k$ = 30\\%: the only level at which "
+        f"contradictions exist. All HSE06 queries ($n={nh}$) and the subset whose reference answer is contested ($n={nc}$). "
+        "Correct uses the conservative reader.}\\label{tab:hse06}\n\\resizebox{\\columnwidth}{!}{%\n\\begin{tabular}{lcccccc}\\toprule\n"
+        f" & \\multicolumn{{3}}{{c}}{{All HSE06 ($n={nh}$)}} & \\multicolumn{{2}}{{c}}{{Contested ($n={nc}$)}} & \\\\\n"
+        "Method & Correct & Audit-suff. & Indep.\\ audit & Correct & Audit-suff. & Nodes\\\\\\midrule\n" + "\n".join(lines) +
+        "\n\\bottomrule\\end{tabular}}\n\\end{table}\n")
+    # tight-budget table: greedy order vs exact optimum, qualified answers
+    lines = []
+    for b_ in (0.1, 0.2):
+        for m in TIGHT:
+            t = df[(df.budget == b_) & (df.method == m)]
+            il = pd.to_numeric(t.ilp_units, errors="coerce")
+            ratio = (t.n_units_complete / il).mean() if il.notna().any() else np.nan
+            opt = (t.n_units_complete == il).mean() if il.notna().any() else np.nan
+            lines.append(f"{int(b_*100)}\\% & {m} & {t.correct_conservative.mean():.2f} & {t.qual_correct.mean():.2f} & "
+                         f"{t.qual_unaccounted.mean():.1f} & {t.n_units_complete.mean():.1f} / {t.n_units.mean():.1f} & "
+                         + (f"{il.mean():.1f} & {ratio:.2f} & {opt:.2f}" if il.notna().any() else "-- & -- & --") + " \\\\")
+        if b_ == 0.1:
+            lines.append("\\midrule")
+    open(os.path.join(out, "table_tight.tex"), "w").write(
+        "\\begin{table*}[t]\\centering\\footnotesize\n\\caption{Tight budgets. Correct: conservative reader. Qualified: certificate-aware "
+        "reader that answers from documented candidates and reports how many are unaccounted for (mean shown). Units: complete canonical units / "
+        "all units. ILP: exact maximum number of complete units under the same budget (HiGHS); Ratio: greedy / ILP; Opt.: share of instances "
+        "where the greedy order attains the optimum.}\\label{tab:tight}\n\\begin{tabular}{llccccccc}\\toprule\n"
+        "Budget & Method & Correct & Qualified & Unaccounted & Units & ILP & Ratio & Opt.\\\\\\midrule\n" + "\n".join(lines) +
+        "\n\\bottomrule\\end{tabular}\n\\end{table*}\n")
     if sweeps:
         rows = []
         for sd in [d] + sweeps:

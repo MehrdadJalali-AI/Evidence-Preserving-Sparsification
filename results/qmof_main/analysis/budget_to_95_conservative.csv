@@ -2,8 +2,10 @@ method,budget
 Condition-aware closure,0.5
 Degree,1.0
 EPS,0.2
+EPS (cost-first order),0.3
 EPS-noExcl,0.2
 EPS-noProv,0.2
+Exclusion-aware closure,0.5
 Full neighbourhood,0.1
 PPR relevance,1.0
 Random,1.0

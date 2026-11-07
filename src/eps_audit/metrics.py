@@ -7,10 +7,17 @@
   with both claims in S; denominator n_contra_pairs (queries without pairs are excluded).
 * audit_sufficient: every canonical unit is complete (all R1-R5 met); replay_ok: executable
   replay reproduces the reference answer from S alone.
+* indep_audit: the method-independent auditor (auditor.py) accepts S, i.e. any valid
+  justification re-derives the reference answer.
+* qual_*: certificate-aware reader; qual_flagged = at least one candidate unaccounted for;
+  qual_correct = its (possibly qualified) answer equals the reference.
+* n_units_complete: number of complete canonical units (compared with the ILP optimum).
 """
 from .units import certificate
-from .readers import READERS
+from .readers import READERS, qualified
 from .replay import replay
+from .auditor import independent_audit
+from .oracle import complete_units
 
 
 def evidence_ok(g, c, S):
@@ -38,6 +45,13 @@ def evaluate(g, q, S, units, ref):
         row[f"correct_{name}"] = int(a["answered"] and same(a, ref))
         row[f"n_used_{name}"] = len(a["used"])
         row[f"n_unsupported_{name}"] = sum(not evidence_ok(g, c, S) for c in a["used"])
+    qa = qualified(g, q, S)
+    row["qual_correct"] = int(same(qa, ref))
+    row["qual_flagged"] = int(qa["unaccounted"] > 0)
+    row["qual_unaccounted"] = qa["unaccounted"]
+    row["indep_audit"] = int(independent_audit(g, q, S, ref))
+    row["n_units_complete"] = complete_units(units, S)
+    row["n_units"] = len(units)
     pairs = [(c, cc) for c in ref["used"] for cc in g.contra[c]]
     row["n_contra_pairs"] = len(pairs)
     row["n_contra_kept"] = sum(c in S and cc in S for c, cc in pairs)

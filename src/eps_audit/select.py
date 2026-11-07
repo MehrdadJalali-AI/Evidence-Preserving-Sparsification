@@ -121,3 +121,63 @@ def conflict_free(g, q, k, units=None):
         if len(S | u["nodes"]) <= k:
             S |= u["nodes"]
     return S
+
+
+def exclusion_aware_closure(g, q, N, k, scores=None):
+    """Condition-aware closure that may also keep exclusion records: claims at the query level
+    first (PPR order), each with its closure; then, for every candidate without a DFT claim at
+    the query level, its exclusion record with its 1-hop neighbourhood (provenance, lookup
+    derivation); then the remaining claims. Greedy, no backtracking, distinct-node budget."""
+    scores = scores or _ppr_scores(g, q, N)
+    claims = [n for n in N if g.ntype[n] == "C"]
+    at = lambda c: g.attr[f"K:{c.split(':', 2)[1]}:{c.split(':', 2)[2]}"]["level_of_theory"] == q["cond"]
+    first = sorted([c for c in claims if at(c)], key=lambda c: (-scores[c], c))
+    rest = sorted([c for c in claims if not at(c)], key=lambda c: (-scores[c], c))
+    excl = [f"X:{m}:{q['cond']}" for m in q["cands"] if f"X:{m}:{q['cond']}" in N]
+    S = {f"M:{m}" for m in q["cands"]}
+    for c in first:
+        u = _closure(g, N, c)
+        if len(S | u) <= k:
+            S |= u
+    for x in excl:
+        u = {x} | {v for v in g.adj[x] if v in N}
+        if len(S | u) <= k:
+            S |= u
+    for c in rest:
+        u = _closure(g, N, c)
+        if len(S | u) <= k:
+            S |= u
+    return S
+
+
+def eps_cost_first(g, q, k, units=None):
+    """EPS variant for the coverage objective: repeatedly adds the unit (support units bundled
+    with their contradiction units, or exclusion units) with the smallest marginal node cost that
+    still fits, ties broken by the EPS priority (higher claim value first). Units remain atomic;
+    it maximises the number of complete units more directly but no longer protects the
+    highest-valued claims first."""
+    if k < len(q["cands"]):
+        raise InfeasibleBudget(q, k)
+    units = units if units is not None else audit_units(g, q)
+    items = []
+    for s in [u for u in units if u["kind"] == "support"]:
+        b = set(s["nodes"]).union(*[u["nodes"] for u in units if u["kind"] == "contradiction" and u["cand"] == s["cand"]])
+        items.append((-s["value"], s["cand"], [b, set(s["nodes"])]))
+    for u in units:
+        if u["kind"] == "exclusion":
+            items.append((0.0, u["cand"], [set(u["nodes"])]))
+    S = {f"M:{m}" for m in q["cands"]}
+    while items:
+        best = None
+        for i, (v, c, opts) in enumerate(items):
+            o = next((o for o in opts if len(S | o) <= k), None)   # first option that fits
+            if o is None:
+                continue
+            cost = len(o - S)
+            if best is None or (cost, v, c) < best[0]:
+                best = ((cost, v, c), i, o)
+        if best is None:
+            break
+        S |= best[2]
+        items.pop(best[1])
+    return S

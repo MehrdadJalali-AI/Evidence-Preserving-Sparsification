@@ -6,11 +6,13 @@ import argparse, csv, json, os, time
 from .data import load_table, functionals, sha256, synthetic_table
 from .graph import build_graph, reproduce_predictions
 from .units import make_queries, neighbourhood, audit_units, justification
-from .select import budget, eps, ppr, random_nodes, degree, type_aware, conflict_free, _ppr_scores
+from .select import budget, eps, ppr, random_nodes, degree, type_aware, conflict_free, exclusion_aware_closure, eps_cost_first, _ppr_scores
+from .oracle import ilp_max_units
 from .readers import conservative
 from .metrics import evaluate
 
-METHODS = ["Full neighbourhood", "EPS", "Conflict-free (CONSIST-inspired)", "Condition-aware closure",
+METHODS = ["Full neighbourhood", "EPS", "EPS (cost-first order)", "Conflict-free (CONSIST-inspired)", "Condition-aware closure",
+           "Exclusion-aware closure",
            "Type-aware closure", "PPR relevance", "Degree", "Random",
            "EPS-noCond", "EPS-noQual", "EPS-noProv", "EPS-noContra", "EPS-noExcl"]
 
@@ -20,8 +22,10 @@ def run_methods(g, q, N, frac, units, scores, seed):
     return k, {
         "Full neighbourhood": N,
         "EPS": eps(g, q, k, units=units),
+        "EPS (cost-first order)": eps_cost_first(g, q, k, units=units),
         "Conflict-free (CONSIST-inspired)": conflict_free(g, q, k, units=units),
         "Condition-aware closure": type_aware(g, q, N, k, scores, condition_aware=True),
+        "Exclusion-aware closure": exclusion_aware_closure(g, q, N, k, scores),
         "Type-aware closure": type_aware(g, q, N, k, scores),
         "PPR relevance": ppr(g, q, N, k, scores),
         "Degree": degree(g, q, N, k),
@@ -82,8 +86,11 @@ def main(argv=None):
                 S = res[name]
                 if name != "Full neighbourhood":
                     assert len(S) <= k, (name, len(S), k)
-                rows.append(dict(seed=a.seed, qid=q["qid"], op=q["op"], cond=q["cond"], budget=frac, k=k,
-                                 N=len(N), J=len(J), method=name, **evaluate(g, q, S, units, ref)))
+                row = dict(seed=a.seed, qid=q["qid"], op=q["op"], cond=q["cond"], budget=frac, k=k,
+                           N=len(N), J=len(J), method=name, **evaluate(g, q, S, units, ref))
+                row["ilp_units"] = ilp_max_units(q, units, k) if (name in ("EPS", "EPS (cost-first order)") and frac <= cfg.get("ilp_max_budget", 0.2)) else ""
+                row["contested_ref"] = int(bool(ref["contested"]))
+                rows.append(row)
         if writer is None:
             writer = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
             if not done:

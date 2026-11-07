@@ -1,0 +1,14 @@
+\begin{table}[t]\centering\footnotesize
+\caption{HSE06 queries only, budget $k$ = 30\%: the only level at which contradictions exist. All HSE06 queries ($n=314$) and the subset whose reference answer is contested ($n=52$). Correct uses the conservative reader.}\label{tab:hse06}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcccccc}\toprule
+ & \multicolumn{3}{c}{All HSE06 ($n=314$)} & \multicolumn{2}{c}{Contested ($n=52$)} & \\
+Method & Correct & Audit-suff. & Indep.\ audit & Correct & Audit-suff. & Nodes\\\midrule
+EPS & 1.00 & 1.00 & 1.00 & 1.00 & 1.00 & 78 \\
+EPS-noContra & 0.83 & 0.55 & 0.83 & 0.00 & 0.00 & 75 \\
+Conflict-free (CONSIST-inspired) & 0.83 & 0.00 & 0.00 & 0.00 & 0.00 & 64 \\
+Exclusion-aware closure & 0.73 & 0.00 & 0.00 & 0.40 & 0.00 & 103 \\
+Condition-aware closure & 0.73 & 0.00 & 0.00 & 0.40 & 0.00 & 102 \\
+PPR relevance & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 103 \\
+\bottomrule\end{tabular}}
+\end{table}

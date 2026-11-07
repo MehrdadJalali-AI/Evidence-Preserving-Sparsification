@@ -48,21 +48,36 @@ is pinned because the cross-fitted prediction model is sensitive to library-vers
 |---|---|
 | `src/eps_audit/graph.py` | evidence graph, closed-world exclusion records, cross-fitted predictions, prediction reproduction |
 | `src/eps_audit/units.py` | queries, query neighbourhood, canonical audit units, certificate |
-| `src/eps_audit/select.py` | EPS budgeted selection and all baselines (distinct-node budget accounting) |
-| `src/eps_audit/readers.py` | permissive (stress-test) and conservative readers |
+| `src/eps_audit/select.py` | EPS budgeted selection (priority and cost-first orders) and all baselines, including the exclusion-aware closure (distinct-node budget accounting) |
+| `src/eps_audit/readers.py` | permissive (stress-test), conservative, claim-filtering and certificate-aware (qualified) readers |
+| `src/eps_audit/auditor.py` | method-independent auditor (accepts any valid justification, not only EPS's canonical units) |
+| `src/eps_audit/oracle.py` | exact 0-1 integer-programming optimum of the budgeted unit-selection problem (HiGHS via SciPy) |
 | `src/eps_audit/replay.py` | executable answer replay |
 | `src/eps_audit/metrics.py` | per-query metrics and their denominators |
 | `src/eps_audit/experiment.py` | resumable runner (per-query CSV output) |
 | `src/eps_audit/analysis.py` | statistics, tables, figure |
 | `configs/` | versioned experiment configurations |
 | `tests/` | unit tests: exclusion rules, budget compliance, shared-node accounting, formal properties, replay, readers, cross-fitting |
-| `results/` | compact released outputs (per-query results gzipped, analysis) |
+| `results/` | compact released outputs (per-query results gzipped, analysis, LLM-reader prompts and responses) |
+| `scripts/llm_*.py` | LLM-reader experiment: build prompts, run them against the Gemini API, score the responses |
+| `docs/EPS_scenario_lab.html` | interactive worked scenario (open in a browser) |
+
+## LLM-reader experiment
+```bash
+python scripts/llm_build_prompts.py configs/qmof_main.json results/llm/prompts.jsonl   # already released
+export GEMINI_API_KEY=...                         # your own key; never written to disk
+python3 scripts/llm_run_gemini.py --list           # models available to your key
+python3 scripts/llm_run_gemini.py --models gemini-flash-latest
+python3 scripts/llm_score.py                       # -> results/llm/llm_scores.csv, table_llm.tex
+```
+The runner uses only the Python standard library and is resumable.
 
 ## Protocol (summary)
 * Queries: 20 random QMOF materials; argmax or threshold (> 2.5 eV) on the band gap at HLE17, HSE06* or HSE06; 300 per seed, seeds 1-3.
 * Predictions: HistGradientBoostingRegressor (max_iter = 300, random_state = seed) on PBE gap + density, PLD, LCD, number of atoms, cell volume; missing descriptors -> column median; 2-fold cross-fitting, no hyper-parameter tuning; predictions are reproducible exactly (checked per run).
 * Contradiction: |prediction - DFT HSE06| > delta (1.0 eV; sensitivity 0.5 and 1.5 eV).
 * Budget: k = max(|candidates|, floor(fraction x |query neighbourhood|)); every method pays for distinct retained nodes.
+* Tight budgets (10%, 20%): the exact optimum of the unit-count objective is computed per query with HiGHS and compared with both EPS orders.
 * Statistics: bootstrap 95% CIs over queries (2,000 resamples, seed 0); exact McNemar tests paired by (seed, query).
 
 ## Citation

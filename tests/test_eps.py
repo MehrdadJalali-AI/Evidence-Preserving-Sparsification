@@ -175,3 +175,77 @@ def test_cross_fitting_no_leakage(setup):
     f0, f1 = g.meta["folds"]
     assert not set(f0) & set(f1)
     assert reproduce_predictions(g) < 1e-9
+
+
+# ---------------------------------------------------------------- extensions (revision)
+from eps_audit.select import exclusion_aware_closure, eps_cost_first
+from eps_audit.readers import claim_filtering, qualified
+from eps_audit.auditor import independent_audit
+from eps_audit.oracle import ilp_max_units, complete_units
+
+
+def test_exclusion_aware_closure_respects_budget_and_keeps_anchors(setup):
+    _, _, g, qs = setup
+    for q in qs:
+        N = neighbourhood(g, q)
+        for frac in (0.1, 0.3, 1.0):
+            k = budget(q, N, frac)
+            S = exclusion_aware_closure(g, q, N, k)
+            assert len(S) <= k and {f"M:{m}" for m in q["cands"]} <= S and S <= N
+
+
+def test_claim_filter_never_abstains_and_agrees_on_full_graph(setup):
+    _, _, g, qs = setup
+    for q in qs:
+        full = set(g.ntype)
+        assert claim_filtering(g, q, full) == conservative(g, q, full)
+        assert claim_filtering(g, q, {f"M:{m}" for m in q["cands"]})["answered"]
+
+
+def test_independent_auditor_accepts_eps_whenever_canonical_audit_passes(setup):
+    _, _, g, qs = setup
+    for q in qs:
+        units, N = audit_units(g, q), neighbourhood(g, q)
+        ref = conservative(g, q, set(g.ntype))
+        for frac in (0.1, 0.2, 0.3, 1.0):
+            S = eps(g, q, budget(q, N, frac), units=units)
+            if certificate(units, S)["audit_sufficient"]:
+                assert independent_audit(g, q, S, ref)
+        assert independent_audit(g, q, justification(units) | {f"M:{m}" for m in q["cands"]}, ref)
+
+
+def test_qualified_reader_is_safe_on_eps(setup):
+    """With EPS, an unflagged qualified answer is always correct (nothing unaccounted)."""
+    _, _, g, qs = setup
+    for q in qs:
+        units, N = audit_units(g, q), neighbourhood(g, q)
+        ref = conservative(g, q, set(g.ntype))
+        for frac in (0.1, 0.2, 0.3):
+            S = eps(g, q, budget(q, N, frac), units=units)
+            a = qualified(g, q, S)
+            if a["unaccounted"] == 0 and certificate(units, S)["audit_sufficient"]:
+                assert a["result"] == ref["result"]
+
+
+def test_ilp_oracle_bounds_greedy(setup):
+    _, _, g, qs = setup
+    for q in qs[:12]:
+        units, N = audit_units(g, q), neighbourhood(g, q)
+        for frac in (0.1, 0.2, 1.0):
+            k = budget(q, N, frac)
+            opt = ilp_max_units(q, units, k)
+            assert complete_units(units, eps(g, q, k, units=units)) <= opt <= len(units)
+            if k >= len(justification(units) | {f"M:{m}" for m in q["cands"]}):
+                assert opt == len(units)
+
+
+def test_cost_first_variant_budget_and_atomic_units(setup):
+    _, _, g, qs = setup
+    for q in qs:
+        units, N = audit_units(g, q), neighbourhood(g, q)
+        for frac in (0.1, 0.2, 1.0):
+            k = budget(q, N, frac)
+            S = eps_cost_first(g, q, k, units=units)
+            assert len(S) <= k and complete_units(units, S) <= ilp_max_units(q, units, k)
+            if k >= len(justification(units) | {f"M:{m}" for m in q["cands"]}):
+                assert certificate(units, S)["audit_sufficient"]

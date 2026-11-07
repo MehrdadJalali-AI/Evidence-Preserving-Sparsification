@@ -1,15 +1,16 @@
 \begin{table*}[t]\centering\footnotesize
-\caption{Full QMOF (20,372 MOFs), 3 seeds, 900 queries, budget $k$ = 30\% of the query neighbourhood (Full neighbourhood: unreduced). Means; bracketed: bootstrap 95\% CI. Correct and coverage use the conservative reader; Unsupp.\ and Contra.\ use the denominators defined in Section~\ref{sec:case}.}\label{tab:main}
+\caption{Full QMOF (20,372 MOFs), 3 seeds, 900 queries, budget $k$ = 30\% of the query neighbourhood (Full neighbourhood: unreduced). Means; bracketed: bootstrap 95\% CI. Correct and coverage use the conservative reader; Correct (filter) uses the claim-filtering reader; Indep.\ audit is the method-independent auditor; nodes and edges are rounded to the nearest integer. Unsupp.\ and Claim-pair contra.\ use the denominators defined in Section~\ref{sec:case}; Claim-pair contra.\ counts only retained claim-node pairs, not complete R4 units.}\label{tab:main}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{lccccccccc}\toprule
-Method & Correct & Coverage & Audit-suff. & Replay & Correct (perm.) & Unsupp.\ (perm.) & Contra. & Nodes & Edges\\\midrule
-Full neighbourhood & 1.00 [1.00, 1.00] & 1.00 & 1.00 & 1.00 & 1.00 [1.00, 1.00] & 0.00 & 1.00 & 345 & 515 \\
-EPS & 1.00 [1.00, 1.00] & 1.00 & 1.00 & 1.00 & 1.00 [1.00, 1.00] & 0.00 & 1.00 & 76 & 93 \\
-Conflict-free (CONSIST-inspired) & 0.94 [0.93, 0.96] & 1.00 & 0.00 & 0.00 & 0.94 [0.93, 0.96] & 0.00 & 0.00 & 64 & 63 \\
-Condition-aware closure & 0.90 [0.88, 0.92] & 1.00 & 0.00 & 0.00 & 0.90 [0.88, 0.92] & 0.00 & 1.00 & 102 & 116 \\
-Type-aware closure & 0.01 [0.00, 0.01] & 1.00 & 0.00 & 0.00 & 0.01 [0.00, 0.01] & 0.00 & 1.00 & 101 & 116 \\
-PPR relevance & 0.00 [0.00, 0.00] & 0.00 & 0.00 & 0.00 & 0.35 [0.32, 0.38] & 1.00 & 1.00 & 103 & 77 \\
-Degree & 0.00 [0.00, 0.00] & 0.00 & 0.00 & 0.00 & 0.35 [0.32, 0.38] & 0.98 & 1.00 & 103 & 76 \\
-Random & 0.00 [0.00, 0.00] & 0.00 & 0.00 & 0.00 & 0.22 [0.20, 0.25] & 0.94 & 0.06 & 103 & 53 \\
+\begin{tabular}{lccccccccccc}\toprule
+Method & Correct & Coverage & Correct (filter) & Audit-suff. & Indep.\ audit & Replay & Correct (perm.) & Unsupp.\ (perm.) & Claim-pair contra. & Nodes & Edges\\\midrule
+Full neighbourhood & 1.00 [1.00, 1.00] & 1.00 & 1.00 [1.00, 1.00] & 1.00 & 1.00 & 1.00 & 1.00 [1.00, 1.00] & 0.00 & 1.00 & 345 & 515 \\
+EPS & 1.00 [1.00, 1.00] & 1.00 & 1.00 [1.00, 1.00] & 1.00 & 1.00 & 1.00 & 1.00 [1.00, 1.00] & 0.00 & 1.00 & 76 & 93 \\
+Conflict-free (CONSIST-inspired) & 0.94 [0.93, 0.96] & 1.00 & 0.94 [0.93, 0.96] & 0.00 & 0.00 & 0.00 & 0.94 [0.93, 0.96] & 0.00 & 0.00 & 64 & 63 \\
+Condition-aware closure & 0.90 [0.89, 0.92] & 1.00 & 0.90 [0.88, 0.92] & 0.00 & 0.00 & 0.00 & 0.90 [0.88, 0.92] & 0.00 & 1.00 & 102 & 116 \\
+Exclusion-aware closure & 0.90 [0.88, 0.92] & 1.00 & 0.90 [0.89, 0.92] & 0.65 & 0.65 & 0.65 & 0.90 [0.88, 0.92] & 0.00 & 1.00 & 102 & 126 \\
+Type-aware closure & 0.01 [0.00, 0.01] & 1.00 & 0.01 [0.00, 0.01] & 0.00 & 0.00 & 0.00 & 0.01 [0.00, 0.01] & 0.00 & 1.00 & 101 & 116 \\
+PPR relevance & 0.00 [0.00, 0.00] & 0.00 & 0.00 [0.00, 0.00] & 0.00 & 0.00 & 0.00 & 0.35 [0.32, 0.38] & 1.00 & 1.00 & 103 & 77 \\
+Degree & 0.00 [0.00, 0.00] & 0.00 & 0.00 [0.00, 0.00] & 0.00 & 0.00 & 0.00 & 0.35 [0.32, 0.38] & 0.98 & 1.00 & 103 & 76 \\
+Random & 0.00 [0.00, 0.00] & 0.00 & 0.01 [0.00, 0.02] & 0.00 & 0.00 & 0.00 & 0.22 [0.20, 0.25] & 0.94 & 0.06 & 103 & 53 \\
 \bottomrule\end{tabular}}
 \end{table*}

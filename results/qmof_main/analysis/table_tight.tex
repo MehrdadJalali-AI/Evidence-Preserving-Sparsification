@@ -1,0 +1,17 @@
+\begin{table*}[t]\centering\footnotesize
+\caption{Tight budgets. Correct: conservative reader. Qualified: certificate-aware reader that answers from documented candidates and reports how many are unaccounted for (mean shown). Units: complete canonical units / all units. ILP: exact maximum number of complete units under the same budget (HiGHS); Ratio: greedy / ILP; Opt.: share of instances where the greedy order attains the optimum.}\label{tab:tight}
+\begin{tabular}{llccccccc}\toprule
+Budget & Method & Correct & Qualified & Unaccounted & Units & ILP & Ratio & Opt.\\\midrule
+10\% & EPS & 0.51 & 0.51 & 16.7 & 3.3 / 20.2 & 9.3 & 0.37 & 0.00 \\
+10\% & EPS (cost-first order) & 0.18 & 0.18 & 10.7 & 9.3 / 20.2 & 9.3 & 1.00 & 1.00 \\
+10\% & Conflict-free (CONSIST-inspired) & 0.50 & 0.50 & 17.3 & 2.7 / 20.2 & -- & -- & -- \\
+10\% & Exclusion-aware closure & 0.10 & 0.10 & 17.4 & 2.8 / 20.2 & -- & -- & -- \\
+10\% & Condition-aware closure & 0.10 & 0.10 & 18.0 & 2.1 / 20.2 & -- & -- & -- \\
+\midrule
+20\% & EPS & 0.97 & 0.97 & 5.9 & 14.3 / 20.2 & 18.1 & 0.78 & 0.03 \\
+20\% & EPS (cost-first order) & 0.84 & 0.84 & 1.9 & 18.1 / 20.2 & 18.1 & 1.00 & 1.00 \\
+20\% & Conflict-free (CONSIST-inspired) & 0.94 & 0.94 & 9.7 & 10.3 / 20.2 & -- & -- & -- \\
+20\% & Exclusion-aware closure & 0.70 & 0.70 & 9.1 & 11.1 / 20.2 & -- & -- & -- \\
+20\% & Condition-aware closure & 0.58 & 0.70 & 12.2 & 8.0 / 20.2 & -- & -- & -- \\
+\bottomrule\end{tabular}
+\end{table*}
