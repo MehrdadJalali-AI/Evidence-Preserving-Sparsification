@@ -157,9 +157,9 @@ def main(argv=None):
         "\\begin{table*}[t]\\centering\\footnotesize\n\\caption{Tight budgets. Correct: conservative reader. Qualified: certificate-aware "
         "reader that answers from documented candidates and reports how many are unaccounted for (mean shown). Units: complete canonical units / "
         "all units. ILP: exact maximum number of complete units under the same budget (HiGHS); Ratio: greedy / ILP; Opt.: share of instances "
-        "where the greedy order attains the optimum.}\\label{tab:tight}\n\\begin{tabular}{llccccccc}\\toprule\n"
+        "where the greedy order attains the optimum.}\\label{tab:tight}\n\\resizebox{\\textwidth}{!}{%\n\\begin{tabular}{llccccccc}\\toprule\n"
         "Budget & Method & Correct & Qualified & Unaccounted & Units & ILP & Ratio & Opt.\\\\\\midrule\n" + "\n".join(lines) +
-        "\n\\bottomrule\\end{tabular}\n\\end{table*}\n")
+        "\n\\bottomrule\\end{tabular}}\n\\end{table*}\n")
     if sweeps:
         rows = []
         for sd in [d] + sweeps:

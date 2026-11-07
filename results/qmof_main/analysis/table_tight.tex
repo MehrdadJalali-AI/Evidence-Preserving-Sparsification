@@ -1,5 +1,6 @@
 \begin{table*}[t]\centering\footnotesize
 \caption{Tight budgets. Correct: conservative reader. Qualified: certificate-aware reader that answers from documented candidates and reports how many are unaccounted for (mean shown). Units: complete canonical units / all units. ILP: exact maximum number of complete units under the same budget (HiGHS); Ratio: greedy / ILP; Opt.: share of instances where the greedy order attains the optimum.}\label{tab:tight}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{llccccccc}\toprule
 Budget & Method & Correct & Qualified & Unaccounted & Units & ILP & Ratio & Opt.\\\midrule
 10\% & EPS & 0.51 & 0.51 & 16.7 & 3.3 / 20.2 & 9.3 & 0.37 & 0.00 \\
@@ -13,5 +14,5 @@ Budget & Method & Correct & Qualified & Unaccounted & Units & ILP & Ratio & Opt.
 20\% & Conflict-free (CONSIST-inspired) & 0.94 & 0.94 & 9.7 & 10.3 / 20.2 & -- & -- & -- \\
 20\% & Exclusion-aware closure & 0.70 & 0.70 & 9.1 & 11.1 / 20.2 & -- & -- & -- \\
 20\% & Condition-aware closure & 0.58 & 0.70 & 12.2 & 8.0 / 20.2 & -- & -- & -- \\
-\bottomrule\end{tabular}
+\bottomrule\end{tabular}}
 \end{table*}
