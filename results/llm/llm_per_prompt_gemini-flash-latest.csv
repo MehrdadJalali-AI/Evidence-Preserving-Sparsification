@@ -1,0 +1,501 @@
+id,seed,qid,level,op,method,budget,contested_ref,correct,answer_ok,abstain,unacc_true,unacc_listed
+s1-q35-PPR-30,1,35,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s1-q35-Conflict-free-30,1,35,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,13,13
+s1-q62-PPR-30,1,62,hse06,argmax,PPR relevance,0.3,1,0,0,1,20,20
+s1-q35-Exclusion-aware-30,1,35,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,13,13
+s1-q62-EPS-20,1,62,hse06,argmax,EPS,0.2,1,0,0,1,7,7
+s1-q35-EPS-20,1,35,hse06,threshold,EPS,0.2,1,0,0,1,8,8
+s1-q62-EPS-30,1,62,hse06,argmax,EPS,0.3,1,1,1,0,0,0
+s1-q35-EPS-30,1,35,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s1-q62-Exclusion-aware-30,1,62,hse06,argmax,Exclusion-aware closure,0.3,1,0,0,1,6,6
+s1-q62-Conflict-free-30,1,62,hse06,argmax,Conflict-free (CONSIST-inspired),0.3,1,0,0,1,6,6
+s1-q79-PPR-30,1,79,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s1-q79-EPS-20,1,79,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s1-q79-EPS-30,1,79,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s1-q79-Exclusion-aware-30,1,79,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,10,10
+s1-q79-Conflict-free-30,1,79,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,9,9
+s1-q129-PPR-30,1,129,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s1-q129-EPS-30,1,129,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s1-q129-EPS-20,1,129,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s1-q129-Exclusion-aware-30,1,129,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,12,12
+s1-q129-Conflict-free-30,1,129,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,11,11
+s1-q159-EPS-20,1,159,hse06,threshold,EPS,0.2,1,0,0,1,5,5
+s1-q159-PPR-30,1,159,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s1-q159-EPS-30,1,159,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s1-q159-Exclusion-aware-30,1,159,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,3,3
+s1-q187-EPS-20,1,187,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s1-q159-Conflict-free-30,1,159,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,5,5
+s1-q187-PPR-30,1,187,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s1-q187-EPS-30,1,187,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s1-q187-Exclusion-aware-30,1,187,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,11,2
+s1-q203-EPS-20,1,203,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s1-q187-Conflict-free-30,1,187,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,9,9
+s1-q203-EPS-30,1,203,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s1-q203-PPR-30,1,203,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s1-q203-Exclusion-aware-30,1,203,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,10,10
+s1-q207-EPS-20,1,207,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s1-q207-PPR-30,1,207,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s1-q203-Conflict-free-30,1,203,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,9,9
+s1-q207-EPS-30,1,207,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s1-q207-Exclusion-aware-30,1,207,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,12,12
+s1-q219-EPS-20,1,219,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s1-q207-Conflict-free-30,1,207,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,11,11
+s1-q219-EPS-30,1,219,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s1-q219-Exclusion-aware-30,1,219,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,1,12,12
+s1-q219-PPR-30,1,219,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s1-q273-EPS-20,1,273,hse06,threshold,EPS,0.2,1,0,0,1,9,9
+s1-q219-Conflict-free-30,1,219,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,11,11
+s1-q273-Conflict-free-30,1,273,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,0,1,7,7
+s1-q273-PPR-30,1,273,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s1-q273-EPS-30,1,273,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s1-q273-Exclusion-aware-30,1,273,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,7,7
+s1-q293-EPS-20,1,293,hse06,threshold,EPS,0.2,1,0,0,1,8,8
+s1-q293-PPR-30,1,293,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s1-q249-EPS-30,1,249,hse06_10hf,threshold,EPS,0.3,0,1,1,0,0,0
+s1-q293-EPS-30,1,293,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s1-q293-Exclusion-aware-30,1,293,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,3,3
+s1-q249-EPS-20,1,249,hse06_10hf,threshold,EPS,0.2,0,0,0,1,4,4
+s1-q293-Conflict-free-30,1,293,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,5,5
+s1-q249-PPR-30,1,249,hse06_10hf,threshold,PPR relevance,0.3,0,0,0,1,20,20
+s1-q249-Exclusion-aware-30,1,249,hse06_10hf,threshold,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s1-q249-Conflict-free-30,1,249,hse06_10hf,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,11,11
+s1-q261-EPS-30,1,261,hse06,threshold,EPS,0.3,0,1,1,0,0,0
+s1-q261-EPS-20,1,261,hse06,threshold,EPS,0.2,0,0,0,1,6,6
+s1-q261-PPR-30,1,261,hse06,threshold,PPR relevance,0.3,0,0,0,1,20,20
+s1-q139-EPS-20,1,139,hse06,threshold,EPS,0.2,0,0,0,1,7,7
+s1-q261-Conflict-free-30,1,261,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,7,7
+s1-q261-Exclusion-aware-30,1,261,hse06,threshold,Exclusion-aware closure,0.3,0,0,0,1,6,6
+s1-q139-EPS-30,1,139,hse06,threshold,EPS,0.3,0,1,1,0,0,0
+s1-q139-PPR-30,1,139,hse06,threshold,PPR relevance,0.3,0,0,0,1,20,20
+s1-q139-Exclusion-aware-30,1,139,hse06,threshold,Exclusion-aware closure,0.3,0,1,1,0,9,9
+s1-q232-EPS-30,1,232,hse06_10hf,argmax,EPS,0.3,0,1,1,0,0,0
+s1-q232-EPS-20,1,232,hse06_10hf,argmax,EPS,0.2,0,0,0,1,4,4
+s1-q232-Exclusion-aware-30,1,232,hse06_10hf,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s1-q232-PPR-30,1,232,hse06_10hf,argmax,PPR relevance,0.3,0,0,0,1,20,20
+s1-q139-Conflict-free-30,1,139,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,9,9
+s1-q232-Conflict-free-30,1,232,hse06_10hf,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,11,11
+s1-q198-EPS-30,1,198,hle17,argmax,EPS,0.3,0,1,1,0,0,0
+s1-q198-EPS-20,1,198,hle17,argmax,EPS,0.2,0,0,0,1,7,7
+s1-q198-Exclusion-aware-30,1,198,hle17,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s1-q198-PPR-30,1,198,hle17,argmax,PPR relevance,0.3,0,0,0,1,19,19
+s1-q198-Conflict-free-30,1,198,hle17,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,9,9
+s1-q224-EPS-30,1,224,hse06,argmax,EPS,0.3,0,1,1,0,0,0
+s1-q224-EPS-20,1,224,hse06,argmax,EPS,0.2,0,0,0,1,10,10
+s1-q150-EPS-30,1,150,hse06_10hf,argmax,EPS,0.3,0,1,1,0,0,0
+s1-q224-Exclusion-aware-30,1,224,hse06,argmax,Exclusion-aware closure,0.3,0,0,0,1,12,12
+s1-q224-PPR-30,1,224,hse06,argmax,PPR relevance,0.3,0,0,0,1,19,19
+s1-q224-Conflict-free-30,1,224,hse06,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,11,11
+s1-q150-EPS-20,1,150,hse06_10hf,argmax,EPS,0.2,0,0,0,1,3,3
+s1-q244-EPS-30,1,244,hse06,argmax,EPS,0.3,0,1,1,0,0,0
+s1-q150-Conflict-free-30,1,150,hse06_10hf,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,12,12
+s1-q150-Exclusion-aware-30,1,150,hse06_10hf,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s1-q244-EPS-20,1,244,hse06,argmax,EPS,0.2,0,0,0,1,3,3
+s1-q150-PPR-30,1,150,hse06_10hf,argmax,PPR relevance,0.3,0,0,0,1,20,20
+s1-q244-Exclusion-aware-30,1,244,hse06,argmax,Exclusion-aware closure,0.3,0,0,0,1,12,12
+s1-q257-EPS-20,1,257,hle17,threshold,EPS,0.2,0,0,0,1,2,2
+s1-q257-EPS-30,1,257,hle17,threshold,EPS,0.3,0,1,1,0,0,0
+s1-q244-Conflict-free-30,1,244,hse06,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,12,12
+s1-q257-PPR-30,1,257,hle17,threshold,PPR relevance,0.3,0,0,0,1,20,19
+s1-q244-PPR-30,1,244,hse06,argmax,PPR relevance,0.3,0,0,0,1,19,19
+s1-q256-EPS-30,1,256,hle17,argmax,EPS,0.3,0,1,1,0,0,0
+s1-q256-EPS-20,1,256,hle17,argmax,EPS,0.2,0,0,0,1,5,5
+s1-q257-Conflict-free-30,1,257,hle17,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,12,12
+s1-q257-Exclusion-aware-30,1,257,hle17,threshold,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s1-q256-Exclusion-aware-30,1,256,hle17,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s1-q256-PPR-30,1,256,hle17,argmax,PPR relevance,0.3,0,0,0,1,19,19
+s1-q117-EPS-20,1,117,hle17,threshold,EPS,0.2,0,0,0,1,6,6
+s1-q117-EPS-30,1,117,hle17,threshold,EPS,0.3,0,1,1,0,0,0
+s1-q256-Conflict-free-30,1,256,hle17,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,10,10
+s1-q117-Exclusion-aware-30,1,117,hle17,threshold,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s1-q117-PPR-30,1,117,hle17,threshold,PPR relevance,0.3,0,0,0,1,19,19
+s1-q117-Conflict-free-30,1,117,hle17,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,7,7
+s1-q119-EPS-20,1,119,hse06,threshold,EPS,0.2,0,0,0,1,7,7
+s1-q119-PPR-30,1,119,hse06,threshold,PPR relevance,0.3,0,0,0,1,20,20
+s1-q119-EPS-30,1,119,hse06,threshold,EPS,0.3,0,1,1,0,0,0
+s1-q119-Exclusion-aware-30,1,119,hse06,threshold,Exclusion-aware closure,0.3,0,1,1,0,9,9
+s1-q119-Conflict-free-30,1,119,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,9,9
+s1-q17-EPS-20,1,17,hse06,threshold,EPS,0.2,0,0,0,1,7,7
+s1-q17-EPS-30,1,17,hse06,threshold,EPS,0.3,0,1,1,0,0,0
+s1-q17-PPR-30,1,17,hse06,threshold,PPR relevance,0.3,0,0,0,1,20,20
+s1-q292-EPS-30,1,292,hse06_10hf,argmax,EPS,0.3,0,1,1,0,0,0
+s1-q292-EPS-20,1,292,hse06_10hf,argmax,EPS,0.2,0,0,0,1,4,4
+s1-q17-Exclusion-aware-30,1,17,hse06,threshold,Exclusion-aware closure,0.3,0,1,1,0,6,6
+s1-q292-PPR-30,1,292,hse06_10hf,argmax,PPR relevance,0.3,0,0,0,1,20,20
+s1-q17-Conflict-free-30,1,17,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,6,6
+s1-q292-Conflict-free-30,1,292,hse06_10hf,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,11,11
+s1-q286-EPS-30,1,286,hse06,argmax,EPS,0.3,0,1,1,0,0,0
+s1-q292-Exclusion-aware-30,1,292,hse06_10hf,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s1-q286-EPS-20,1,286,hse06,argmax,EPS,0.2,0,0,0,1,6,6
+s1-q286-Exclusion-aware-30,1,286,hse06,argmax,Exclusion-aware closure,0.3,0,0,0,1,6,6
+s1-q286-PPR-30,1,286,hse06,argmax,PPR relevance,0.3,0,0,0,1,20,20
+s1-q153-EPS-30,1,153,hse06,threshold,EPS,0.3,0,1,1,0,0,0
+s1-q286-Conflict-free-30,1,286,hse06,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,7,7
+s1-q153-EPS-20,1,153,hse06,threshold,EPS,0.2,0,0,0,1,10,10
+s1-q153-PPR-30,1,153,hse06,threshold,PPR relevance,0.3,0,0,0,1,19,19
+s2-q5-EPS-20,2,5,hse06,threshold,EPS,0.2,1,0,0,1,9,9
+s1-q153-Conflict-free-30,1,153,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,12,12
+s1-q153-Exclusion-aware-30,1,153,hse06,threshold,Exclusion-aware closure,0.3,0,1,1,0,10,10
+s2-q5-PPR-30,2,5,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s2-q5-EPS-30,2,5,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s2-q5-Exclusion-aware-30,2,5,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,1,10,10
+s2-q6-EPS-30,2,6,hse06,argmax,EPS,0.3,1,1,1,0,0,0
+s2-q6-EPS-20,2,6,hse06,argmax,EPS,0.2,1,0,0,1,8,8
+s2-q6-PPR-30,2,6,hse06,argmax,PPR relevance,0.3,1,0,0,1,20,20
+s2-q6-Exclusion-aware-30,2,6,hse06,argmax,Exclusion-aware closure,0.3,1,0,0,1,7,6
+s2-q5-Conflict-free-30,2,5,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,8,8
+s2-q6-Conflict-free-30,2,6,hse06,argmax,Conflict-free (CONSIST-inspired),0.3,1,0,0,1,8,8
+s2-q33-EPS-20,2,33,hse06,threshold,EPS,0.2,1,0,0,1,8,8
+s2-q33-EPS-30,2,33,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s2-q33-PPR-30,2,33,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s2-q33-Exclusion-aware-30,2,33,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,7,1
+s2-q33-Conflict-free-30,2,33,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,8,8
+s2-q75-EPS-20,2,75,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s2-q75-EPS-30,2,75,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s2-q75-PPR-30,2,75,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s2-q75-Exclusion-aware-30,2,75,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,1,11,11
+s2-q81-EPS-20,2,81,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s2-q75-Conflict-free-30,2,75,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,10,10
+s2-q81-EPS-30,2,81,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s2-q81-Exclusion-aware-30,2,81,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,13,13
+s2-q81-Conflict-free-30,2,81,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,10,10
+s2-q93-EPS-20,2,93,hse06,threshold,EPS,0.2,1,0,0,1,7,7
+s2-q93-EPS-30,2,93,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s2-q93-PPR-30,2,93,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s2-q81-PPR-30,2,81,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s2-q93-Exclusion-aware-30,2,93,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,6,6
+s2-q93-Conflict-free-30,2,93,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,6,6
+s2-q135-EPS-30,2,135,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s2-q135-EPS-20,2,135,hse06,threshold,EPS,0.2,1,0,0,1,12,12
+s2-q135-PPR-30,2,135,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s2-q135-Exclusion-aware-30,2,135,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,12,12
+s2-q151-EPS-20,2,151,hse06,threshold,EPS,0.2,1,0,0,1,11,11
+s2-q135-Conflict-free-30,2,135,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,12,12
+s2-q151-EPS-30,2,151,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s2-q151-PPR-30,2,151,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s2-q151-Exclusion-aware-30,2,151,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,1,14,14
+s2-q197-EPS-30,2,197,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s2-q151-Conflict-free-30,2,151,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,11,11
+s2-q197-EPS-20,2,197,hse06,threshold,EPS,0.2,1,0,0,1,8,8
+s2-q197-PPR-30,2,197,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s2-q197-Exclusion-aware-30,2,197,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,13,13
+s2-q197-Conflict-free-30,2,197,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,13,13
+s2-q209-EPS-30,2,209,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s2-q209-EPS-20,2,209,hse06,threshold,EPS,0.2,1,0,0,1,8,8
+s2-q209-PPR-30,2,209,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s2-q209-Exclusion-aware-30,2,209,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,13,13
+s2-q219-EPS-20,2,219,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s2-q219-PPR-30,2,219,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s2-q219-Exclusion-aware-30,2,219,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,1,12,12
+s2-q219-EPS-30,2,219,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s2-q209-Conflict-free-30,2,209,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,13,13
+s2-q235-EPS-20,2,235,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s2-q219-Conflict-free-30,2,219,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,11,11
+s2-q235-EPS-30,2,235,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s2-q235-PPR-30,2,235,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s2-q235-Conflict-free-30,2,235,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,9,9
+s2-q235-Exclusion-aware-30,2,235,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,10,10
+s2-q239-EPS-20,2,239,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s2-q239-PPR-30,2,239,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s2-q239-EPS-30,2,239,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s2-q239-Exclusion-aware-30,2,239,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,10,10
+s2-q265-EPS-20,2,265,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s2-q265-EPS-30,2,265,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s2-q265-PPR-30,2,265,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s2-q239-Conflict-free-30,2,239,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,9,9
+s2-q265-Exclusion-aware-30,2,265,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,1,10,10
+s2-q265-Conflict-free-30,2,265,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,9,9
+s2-q283-EPS-20,2,283,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s2-q283-PPR-30,2,283,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s2-q283-EPS-30,2,283,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s2-q283-Exclusion-aware-30,2,283,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,10,10
+s2-q58-EPS-30,2,58,hse06_10hf,argmax,EPS,0.3,0,1,1,0,0,0
+s2-q283-Conflict-free-30,2,283,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,0,1,9,9
+s2-q58-EPS-20,2,58,hse06_10hf,argmax,EPS,0.2,0,0,0,1,7,7
+s2-q58-Exclusion-aware-30,2,58,hse06_10hf,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s2-q80-EPS-30,2,80,hse06,argmax,EPS,0.3,0,1,1,0,0,0
+s2-q58-PPR-30,2,58,hse06_10hf,argmax,PPR relevance,0.3,0,0,0,1,20,20
+s2-q58-Conflict-free-30,2,58,hse06_10hf,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,9,9
+s2-q80-EPS-20,2,80,hse06,argmax,EPS,0.2,0,0,0,1,4,4
+s2-q80-PPR-30,2,80,hse06,argmax,PPR relevance,0.3,0,0,0,1,19,19
+s2-q80-Exclusion-aware-30,2,80,hse06,argmax,Exclusion-aware closure,0.3,0,0,0,1,10,10
+s2-q80-Conflict-free-30,2,80,hse06,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,12,12
+s2-q119-EPS-20,2,119,hle17,threshold,EPS,0.2,0,0,0,1,4,4
+s2-q119-EPS-30,2,119,hle17,threshold,EPS,0.3,0,1,1,0,0,0
+s2-q119-PPR-30,2,119,hle17,threshold,PPR relevance,0.3,0,0,0,1,19,19
+s2-q186-EPS-30,2,186,hse06_10hf,argmax,EPS,0.3,0,1,1,0,0,0
+s2-q186-EPS-20,2,186,hse06_10hf,argmax,EPS,0.2,0,0,0,1,3,3
+s2-q186-Exclusion-aware-30,2,186,hse06_10hf,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s2-q119-Exclusion-aware-30,2,119,hle17,threshold,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s2-q186-PPR-30,2,186,hse06_10hf,argmax,PPR relevance,0.3,0,0,0,1,20,20
+s2-q164-EPS-30,2,164,hse06,argmax,EPS,0.3,0,1,1,0,0,0
+s2-q186-Conflict-free-30,2,186,hse06_10hf,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,12,12
+s2-q164-EPS-20,2,164,hse06,argmax,EPS,0.2,0,0,0,1,8,8
+s2-q119-Conflict-free-30,2,119,hle17,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,11,11
+s2-q164-Exclusion-aware-30,2,164,hse06,argmax,Exclusion-aware closure,0.3,0,0,0,1,7,7
+s2-q164-Conflict-free-30,2,164,hse06,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,8,8
+s2-q164-PPR-30,2,164,hse06,argmax,PPR relevance,0.3,0,0,0,1,20,20
+s2-q195-EPS-20,2,195,hse06_10hf,threshold,EPS,0.2,0,0,0,1,3,3
+s2-q195-EPS-30,2,195,hse06_10hf,threshold,EPS,0.3,0,1,1,0,0,0
+s2-q206-EPS-30,2,206,hse06,argmax,EPS,0.3,0,1,1,0,0,0
+s2-q195-Exclusion-aware-30,2,195,hse06_10hf,threshold,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s2-q195-PPR-30,2,195,hse06_10hf,threshold,PPR relevance,0.3,0,0,0,1,20,20
+s2-q206-EPS-20,2,206,hse06,argmax,EPS,0.2,0,0,0,1,8,8
+s2-q206-PPR-30,2,206,hse06,argmax,PPR relevance,0.3,0,0,0,1,20,20
+s2-q195-Conflict-free-30,2,195,hse06_10hf,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,12,12
+s2-q206-Conflict-free-30,2,206,hse06,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,8,8
+s2-q206-Exclusion-aware-30,2,206,hse06,argmax,Exclusion-aware closure,0.3,0,0,0,1,6,6
+s2-q83-EPS-30,2,83,hle17,threshold,EPS,0.3,0,0,0,0,0,0
+s2-q83-EPS-20,2,83,hle17,threshold,EPS,0.2,0,0,0,1,5,5
+s2-q83-Exclusion-aware-30,2,83,hle17,threshold,Exclusion-aware closure,0.3,0,0,0,0,0,0
+s2-q83-PPR-30,2,83,hle17,threshold,PPR relevance,0.3,0,0,0,1,19,19
+s2-q55-EPS-20,2,55,hle17,threshold,EPS,0.2,0,0,0,1,5,5
+s2-q55-EPS-30,2,55,hle17,threshold,EPS,0.3,0,1,1,0,0,0
+s2-q83-Conflict-free-30,2,83,hle17,threshold,Conflict-free (CONSIST-inspired),0.3,0,0,0,0,10,10
+s2-q55-PPR-30,2,55,hle17,threshold,PPR relevance,0.3,0,0,0,1,19,19
+s2-q76-EPS-20,2,76,hle17,argmax,EPS,0.2,0,0,0,1,4,4
+s2-q55-Exclusion-aware-30,2,55,hle17,threshold,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s2-q76-EPS-30,2,76,hle17,argmax,EPS,0.3,0,1,1,0,0,0
+s2-q76-Exclusion-aware-30,2,76,hle17,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s2-q76-PPR-30,2,76,hle17,argmax,PPR relevance,0.3,0,0,0,1,20,20
+s2-q55-Conflict-free-30,2,55,hle17,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,10,10
+s2-q38-EPS-30,2,38,hse06_10hf,argmax,EPS,0.3,0,1,1,0,0,0
+s2-q38-EPS-20,2,38,hse06_10hf,argmax,EPS,0.2,0,0,0,1,4,4
+s2-q76-Conflict-free-30,2,76,hle17,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,10,10
+s2-q38-Exclusion-aware-30,2,38,hse06_10hf,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s2-q38-PPR-30,2,38,hse06_10hf,argmax,PPR relevance,0.3,0,0,0,1,20,20
+s2-q38-Conflict-free-30,2,38,hse06_10hf,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,11,11
+s2-q279-EPS-20,2,279,hse06,threshold,EPS,0.2,0,0,0,1,10,10
+s2-q279-EPS-30,2,279,hse06,threshold,EPS,0.3,0,1,1,0,0,0
+s2-q279-PPR-30,2,279,hse06,threshold,PPR relevance,0.3,0,0,0,1,19,19
+s2-q24-EPS-30,2,24,hle17,argmax,EPS,0.3,0,1,1,0,0,0
+s2-q279-Exclusion-aware-30,2,279,hse06,threshold,Exclusion-aware closure,0.3,0,0,0,0,11,11
+s2-q24-EPS-20,2,24,hle17,argmax,EPS,0.2,0,0,0,1,8,8
+s2-q24-Exclusion-aware-30,2,24,hle17,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s2-q24-PPR-30,2,24,hle17,argmax,PPR relevance,0.3,0,0,0,1,19,19
+s2-q279-Conflict-free-30,2,279,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,10,10
+s2-q24-Conflict-free-30,2,24,hle17,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,8,8
+s2-q163-EPS-20,2,163,hle17,threshold,EPS,0.2,0,0,0,1,8,8
+s2-q163-EPS-30,2,163,hle17,threshold,EPS,0.3,0,1,1,0,0,0
+s2-q163-PPR-30,2,163,hle17,threshold,PPR relevance,0.3,0,0,0,1,19,19
+s2-q163-Conflict-free-30,2,163,hle17,threshold,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,8,8
+s2-q163-Exclusion-aware-30,2,163,hle17,threshold,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s2-q39-EPS-20,2,39,hse06,threshold,EPS,0.2,0,0,0,1,4,4
+s2-q39-EPS-30,2,39,hse06,threshold,EPS,0.3,0,1,1,0,0,0
+s2-q39-Exclusion-aware-30,2,39,hse06,threshold,Exclusion-aware closure,0.3,0,0,0,1,11,11
+s2-q39-PPR-30,2,39,hse06,threshold,PPR relevance,0.3,0,0,0,1,19,19
+s2-q215-EPS-30,2,215,hle17,threshold,EPS,0.3,0,1,1,0,0,0
+s2-q215-EPS-20,2,215,hle17,threshold,EPS,0.2,0,0,0,1,2,2
+s2-q39-Conflict-free-30,2,39,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,11,11
+s2-q215-PPR-30,2,215,hle17,threshold,PPR relevance,0.3,0,0,0,1,19,19
+s2-q215-Exclusion-aware-30,2,215,hle17,threshold,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s3-q11-EPS-20,3,11,hse06,threshold,EPS,0.2,1,0,0,1,7,7
+s2-q215-Conflict-free-30,2,215,hle17,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,13,13
+s3-q11-PPR-30,3,11,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s3-q11-EPS-30,3,11,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q18-EPS-30,3,18,hse06,argmax,EPS,0.3,1,1,1,0,0,0
+s3-q18-EPS-20,3,18,hse06,argmax,EPS,0.2,1,0,0,1,8,8
+s3-q11-Exclusion-aware-30,3,11,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,6,6
+s3-q11-Conflict-free-30,3,11,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,6,6
+s3-q18-Exclusion-aware-30,3,18,hse06,argmax,Exclusion-aware closure,0.3,1,0,0,1,8,8
+s3-q18-PPR-30,3,18,hse06,argmax,PPR relevance,0.3,1,0,0,1,20,20
+s3-q18-Conflict-free-30,3,18,hse06,argmax,Conflict-free (CONSIST-inspired),0.3,1,0,0,1,8,8
+s3-q37-EPS-20,3,37,hse06,threshold,EPS,0.2,1,0,0,1,8,8
+s3-q37-PPR-30,3,37,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s3-q37-EPS-30,3,37,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q39-EPS-20,3,39,hse06,threshold,EPS,0.2,1,0,0,1,11,11
+s3-q37-Conflict-free-30,3,37,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,6,6
+s3-q37-Exclusion-aware-30,3,37,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,6,6
+s3-q39-EPS-30,3,39,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q39-Exclusion-aware-30,3,39,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,1,12,12
+s3-q39-PPR-30,3,39,hse06,threshold,PPR relevance,0.3,1,0,0,1,18,18
+s3-q45-EPS-20,3,45,hse06,threshold,EPS,0.2,1,0,0,1,8,8
+s3-q39-Conflict-free-30,3,39,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,14,14
+s3-q45-PPR-30,3,45,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s3-q45-EPS-30,3,45,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q55-EPS-20,3,55,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s3-q55-PPR-30,3,55,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s3-q45-Exclusion-aware-30,3,45,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,7,6
+s3-q45-Conflict-free-30,3,45,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,8,8
+s3-q55-EPS-30,3,55,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q55-Exclusion-aware-30,3,55,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,11,11
+s3-q65-EPS-20,3,65,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s3-q65-PPR-30,3,65,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s3-q55-Conflict-free-30,3,55,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,10,10
+s3-q65-EPS-30,3,65,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q65-Exclusion-aware-30,3,65,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,1,12,12
+s3-q65-Conflict-free-30,3,65,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,11,11
+s3-q69-EPS-20,3,69,hse06,threshold,EPS,0.2,1,0,0,1,8,8
+s3-q69-EPS-30,3,69,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q69-PPR-30,3,69,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s3-q69-Exclusion-aware-30,3,69,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,8,8
+s3-q69-Conflict-free-30,3,69,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,8,8
+s3-q75-EPS-20,3,75,hse06,threshold,EPS,0.2,1,0,0,1,9,9
+s3-q75-PPR-30,3,75,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s3-q75-EPS-30,3,75,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q75-Conflict-free-30,3,75,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,0,1,7,7
+s3-q75-Exclusion-aware-30,3,75,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,8,8
+s3-q107-EPS-20,3,107,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s3-q107-EPS-30,3,107,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q107-Exclusion-aware-30,3,107,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,1,13,13
+s3-q107-PPR-30,3,107,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s3-q111-EPS-20,3,111,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s3-q107-Conflict-free-30,3,107,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,11,11
+s3-q111-PPR-30,3,111,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s3-q111-EPS-30,3,111,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q111-Exclusion-aware-30,3,111,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,10,10
+s3-q111-Conflict-free-30,3,111,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,9,9
+s3-q119-EPS-20,3,119,hse06,threshold,EPS,0.2,1,0,0,1,11,11
+s3-q119-EPS-30,3,119,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q119-Exclusion-aware-30,3,119,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,12,12
+s3-q119-PPR-30,3,119,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s3-q119-Conflict-free-30,3,119,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,10,10
+s3-q145-PPR-30,3,145,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s3-q145-EPS-30,3,145,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q145-EPS-20,3,145,hse06,threshold,EPS,0.2,1,1,1,0,10,10
+s3-q145-Exclusion-aware-30,3,145,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,11,11
+s3-q163-EPS-20,3,163,hse06,threshold,EPS,0.2,1,0,0,1,9,9
+s3-q163-PPR-30,3,163,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s3-q145-Conflict-free-30,3,145,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,10,10
+s3-q163-EPS-30,3,163,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q163-Exclusion-aware-30,3,163,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,6,6
+s3-q195-EPS-30,3,195,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q163-Conflict-free-30,3,163,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,7,7
+s3-q195-EPS-20,3,195,hse06,threshold,EPS,0.2,1,0,0,1,11,11
+s3-q195-PPR-30,3,195,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s3-q195-Exclusion-aware-30,3,195,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,1,14,13
+s3-q205-EPS-20,3,205,hse06,threshold,EPS,0.2,1,0,0,1,9,9
+s3-q205-PPR-30,3,205,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,19
+s3-q195-Conflict-free-30,3,195,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,11,11
+s3-q205-EPS-30,3,205,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q205-Exclusion-aware-30,3,205,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,9,1
+s3-q205-Conflict-free-30,3,205,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,9,9
+s3-q220-EPS-30,3,220,hse06,argmax,EPS,0.3,1,1,1,0,0,0
+s3-q220-EPS-20,3,220,hse06,argmax,EPS,0.2,1,0,0,1,9,9
+s3-q220-PPR-30,3,220,hse06,argmax,PPR relevance,0.3,1,0,0,1,19,19
+s3-q220-Exclusion-aware-30,3,220,hse06,argmax,Exclusion-aware closure,0.3,1,0,0,1,12,12
+s3-q233-EPS-20,3,233,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s3-q220-Conflict-free-30,3,220,hse06,argmax,Conflict-free (CONSIST-inspired),0.3,1,0,0,1,12,12
+s3-q233-PPR-30,3,233,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,15
+s3-q233-EPS-30,3,233,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q233-Exclusion-aware-30,3,233,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,1,11,11
+s3-q258-EPS-30,3,258,hse06,argmax,EPS,0.3,1,1,1,0,0,0
+s3-q233-Conflict-free-30,3,233,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,10,10
+s3-q258-EPS-20,3,258,hse06,argmax,EPS,0.2,1,0,0,1,9,9
+s3-q258-Exclusion-aware-30,3,258,hse06,argmax,Exclusion-aware closure,0.3,1,0,0,1,12,12
+s3-q258-PPR-30,3,258,hse06,argmax,PPR relevance,0.3,1,0,0,1,19,19
+s3-q258-Conflict-free-30,3,258,hse06,argmax,Conflict-free (CONSIST-inspired),0.3,1,0,0,1,12,12
+s3-q259-EPS-20,3,259,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s3-q259-EPS-30,3,259,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q259-PPR-30,3,259,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s3-q261-EPS-30,3,261,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q259-Exclusion-aware-30,3,259,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,10,10
+s3-q259-Conflict-free-30,3,259,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,9,9
+s3-q261-EPS-20,3,261,hse06,threshold,EPS,0.2,1,0,0,1,12,12
+s3-q261-PPR-30,3,261,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s3-q261-Exclusion-aware-30,3,261,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,13,13
+s3-q263-EPS-30,3,263,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q261-Conflict-free-30,3,261,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,13,13
+s3-q263-EPS-20,3,263,hse06,threshold,EPS,0.2,1,0,0,1,11,11
+s3-q263-Exclusion-aware-30,3,263,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,11,11
+s3-q263-PPR-30,3,263,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s3-q275-EPS-20,3,275,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s3-q275-EPS-30,3,275,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q263-Conflict-free-30,3,263,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,9,9
+s3-q275-PPR-30,3,275,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s3-q275-Exclusion-aware-30,3,275,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,12,12
+s3-q279-PPR-30,3,279,hse06,threshold,PPR relevance,0.3,1,0,0,1,20,20
+s3-q279-EPS-30,3,279,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q279-EPS-20,3,279,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s3-q279-Exclusion-aware-30,3,279,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,0,7,7
+s3-q279-Conflict-free-30,3,279,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,7,7
+s3-q283-PPR-30,3,283,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s3-q283-EPS-30,3,283,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q283-EPS-20,3,283,hse06,threshold,EPS,0.2,1,0,0,1,9,8
+s3-q283-Exclusion-aware-30,3,283,hse06,threshold,Exclusion-aware closure,0.3,1,1,1,0,12,12
+s3-q297-EPS-20,3,297,hse06,threshold,EPS,0.2,1,0,0,1,10,10
+s3-q283-Conflict-free-30,3,283,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,12,12
+s3-q297-EPS-30,3,297,hse06,threshold,EPS,0.3,1,1,1,0,0,0
+s3-q297-PPR-30,3,297,hse06,threshold,PPR relevance,0.3,1,0,0,1,19,19
+s3-q297-Exclusion-aware-30,3,297,hse06,threshold,Exclusion-aware closure,0.3,1,0,0,1,12,12
+s3-q198-EPS-30,3,198,hle17,argmax,EPS,0.3,0,1,1,0,0,0
+s3-q198-EPS-20,3,198,hle17,argmax,EPS,0.2,0,0,0,1,7,7
+s3-q297-Conflict-free-30,3,297,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,11,11
+s3-q198-Exclusion-aware-30,3,198,hle17,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s3-q198-PPR-30,3,198,hle17,argmax,PPR relevance,0.3,0,0,0,1,19,19
+s3-q275-Conflict-free-30,3,275,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,1,0,1,0,11,11
+s3-q198-Conflict-free-30,3,198,hle17,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,9,9
+s3-q189-EPS-30,3,189,hse06_10hf,threshold,EPS,0.3,0,1,1,0,0,0
+s3-q189-EPS-20,3,189,hse06_10hf,threshold,EPS,0.2,0,0,0,1,4,4
+s3-q189-Exclusion-aware-30,3,189,hse06_10hf,threshold,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s3-q189-PPR-30,3,189,hse06_10hf,threshold,PPR relevance,0.3,0,0,0,1,20,20
+s3-q251-EPS-30,3,251,hle17,threshold,EPS,0.3,0,1,1,0,0,0
+s3-q189-Conflict-free-30,3,189,hse06_10hf,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,11,11
+s3-q251-EPS-20,3,251,hle17,threshold,EPS,0.2,0,0,0,1,3,3
+s3-q184-EPS-30,3,184,hse06,argmax,EPS,0.3,0,1,1,0,0,0
+s3-q251-PPR-30,3,251,hle17,threshold,PPR relevance,0.3,0,0,0,1,19,19
+s3-q251-Exclusion-aware-30,3,251,hle17,threshold,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s3-q184-EPS-20,3,184,hse06,argmax,EPS,0.2,0,0,0,1,4,4
+s3-q251-Conflict-free-30,3,251,hle17,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,12,12
+s3-q184-PPR-30,3,184,hse06,argmax,PPR relevance,0.3,0,0,0,1,19,19
+s3-q184-Exclusion-aware-30,3,184,hse06,argmax,Exclusion-aware closure,0.3,0,0,0,1,11,11
+s3-q167-EPS-30,3,167,hse06_10hf,threshold,EPS,0.3,0,1,1,0,0,0
+s3-q184-Conflict-free-30,3,184,hse06,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,11,11
+s3-q167-EPS-20,3,167,hse06_10hf,threshold,EPS,0.2,0,0,0,1,1,1
+s3-q167-PPR-30,3,167,hse06_10hf,threshold,PPR relevance,0.3,0,0,0,1,18,18
+s3-q167-Exclusion-aware-30,3,167,hse06_10hf,threshold,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s3-q68-EPS-30,3,68,hse06_10hf,argmax,EPS,0.3,0,1,1,0,0,0
+s3-q68-EPS-20,3,68,hse06_10hf,argmax,EPS,0.2,0,0,0,1,1,1
+s3-q167-Conflict-free-30,3,167,hse06_10hf,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,14,14
+s3-q68-Conflict-free-30,3,68,hse06_10hf,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,14,14
+s3-q68-PPR-30,3,68,hse06_10hf,argmax,PPR relevance,0.3,0,0,0,1,18,18
+s3-q200-EPS-30,3,200,hle17,argmax,EPS,0.3,0,1,1,0,0,0
+s3-q68-Exclusion-aware-30,3,68,hse06_10hf,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s3-q200-EPS-20,3,200,hle17,argmax,EPS,0.2,0,0,0,1,6,6
+s3-q200-PPR-30,3,200,hle17,argmax,PPR relevance,0.3,0,0,0,1,19,19
+s3-q200-Conflict-free-30,3,200,hle17,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,7,7
+s3-q200-Exclusion-aware-30,3,200,hle17,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s3-q41-EPS-20,3,41,hse06_10hf,threshold,EPS,0.2,0,0,0,1,5,5
+s3-q41-EPS-30,3,41,hse06_10hf,threshold,EPS,0.3,0,1,1,0,0,0
+s3-q41-PPR-30,3,41,hse06_10hf,threshold,PPR relevance,0.3,0,0,0,1,20,20
+s3-q41-Exclusion-aware-30,3,41,hse06_10hf,threshold,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s3-q41-Conflict-free-30,3,41,hse06_10hf,threshold,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,5,5
+s3-q113-EPS-20,3,113,hse06,threshold,EPS,0.2,0,0,0,1,5,5
+s3-q113-EPS-30,3,113,hse06,threshold,EPS,0.3,0,1,1,0,0,0
+s3-q244-EPS-30,3,244,hse06,argmax,EPS,0.3,0,1,1,0,0,0
+s3-q113-PPR-30,3,113,hse06,threshold,PPR relevance,0.3,0,0,0,1,19,19
+s3-q113-Exclusion-aware-30,3,113,hse06,threshold,Exclusion-aware closure,0.3,0,0,0,1,10,10
+s3-q244-EPS-20,3,244,hse06,argmax,EPS,0.2,0,0,0,1,11,11
+s3-q244-PPR-30,3,244,hse06,argmax,PPR relevance,0.3,0,0,0,1,19,19
+s3-q244-Conflict-free-30,3,244,hse06,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,10,10
+s3-q244-Exclusion-aware-30,3,244,hse06,argmax,Exclusion-aware closure,0.3,0,0,0,1,13,13
+s3-q114-EPS-30,3,114,hse06_10hf,argmax,EPS,0.3,0,1,1,0,0,0
+s3-q113-Conflict-free-30,3,113,hse06,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,10,10
+s3-q114-EPS-20,3,114,hse06_10hf,argmax,EPS,0.2,0,0,0,1,5,5
+s3-q62-EPS-30,3,62,hse06,argmax,EPS,0.3,0,1,1,0,0,0
+s3-q114-PPR-30,3,114,hse06_10hf,argmax,PPR relevance,0.3,0,0,0,1,20,20
+s3-q114-Conflict-free-30,3,114,hse06_10hf,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,10,10
+s3-q114-Exclusion-aware-30,3,114,hse06_10hf,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s3-q62-EPS-20,3,62,hse06,argmax,EPS,0.2,0,0,0,1,9,9
+s3-q62-PPR-30,3,62,hse06,argmax,PPR relevance,0.3,0,0,0,1,19,19
+s3-q62-Exclusion-aware-30,3,62,hse06,argmax,Exclusion-aware closure,0.3,0,0,0,1,12,12
+s3-q62-Conflict-free-30,3,62,hse06,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,12,12
+s3-q27-EPS-20,3,27,hse06_10hf,threshold,EPS,0.2,0,0,0,1,7,7
+s3-q27-EPS-30,3,27,hse06_10hf,threshold,EPS,0.3,0,1,1,0,0,0
+s3-q27-PPR-30,3,27,hse06_10hf,threshold,PPR relevance,0.3,0,0,0,1,20,20
+s3-q240-EPS-30,3,240,hle17,argmax,EPS,0.3,0,1,1,0,0,0
+s3-q27-Conflict-free-30,3,27,hse06_10hf,threshold,Conflict-free (CONSIST-inspired),0.3,0,1,1,0,9,9
+s3-q27-Exclusion-aware-30,3,27,hse06_10hf,threshold,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s3-q240-Exclusion-aware-30,3,240,hle17,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s3-q240-EPS-20,3,240,hle17,argmax,EPS,0.2,0,0,0,1,3,3
+s3-q240-Conflict-free-30,3,240,hle17,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,12,12
+s3-q296-EPS-30,3,296,hse06_10hf,argmax,EPS,0.3,0,1,1,0,0,0
+s3-q240-PPR-30,3,240,hle17,argmax,PPR relevance,0.3,0,0,0,1,19,19
+s3-q296-EPS-20,3,296,hse06_10hf,argmax,EPS,0.2,0,0,0,1,3,3
+s3-q296-PPR-30,3,296,hse06_10hf,argmax,PPR relevance,0.3,0,0,0,1,20,19
+s3-q296-Exclusion-aware-30,3,296,hse06_10hf,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s3-q106-EPS-30,3,106,hle17,argmax,EPS,0.3,0,1,1,0,0,0
+s3-q296-Conflict-free-30,3,296,hse06_10hf,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,12,12
+s3-q106-EPS-20,3,106,hle17,argmax,EPS,0.2,0,0,0,1,6,6
+s3-q106-Exclusion-aware-30,3,106,hle17,argmax,Exclusion-aware closure,0.3,0,1,1,0,0,0
+s3-q106-PPR-30,3,106,hle17,argmax,PPR relevance,0.3,0,0,0,1,19,19
+s3-q106-Conflict-free-30,3,106,hle17,argmax,Conflict-free (CONSIST-inspired),0.3,0,0,0,1,7,7

@@ -67,10 +67,12 @@ is pinned because the cross-fitted prediction model is sensitive to library-vers
 python scripts/llm_build_prompts.py configs/qmof_main.json results/llm/prompts.jsonl   # already released
 export GEMINI_API_KEY=...                         # your own key; never written to disk
 python3 scripts/llm_run_gemini.py --list           # models available to your key
-python3 scripts/llm_run_gemini.py --models gemini-flash-latest
-python3 scripts/llm_score.py                       # -> results/llm/llm_scores.csv, table_llm.tex
+python3 scripts/llm_run_gemini.py --models gemini-flash-latest --workers 6 --thinking low
+python3 scripts/llm_score.py                       # -> llm_scores.csv, llm_per_prompt_<model>.csv, table_llm.tex
 ```
-The runner uses only the Python standard library and is resumable.
+The runner uses only the Python standard library and is resumable. The released responses
+(`results/llm/responses_gemini-flash-latest.jsonl`) were obtained with temperature 0, JSON output and
+thinking level `low`; rerunning the alias later may reach a different model version.
 
 ## Protocol (summary)
 * Queries: 20 random QMOF materials; argmax or threshold (> 2.5 eV) on the band gap at HLE17, HSE06* or HSE06; 300 per seed, seeds 1-3.
