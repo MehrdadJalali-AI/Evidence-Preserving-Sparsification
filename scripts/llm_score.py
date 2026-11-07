@@ -41,7 +41,9 @@ def as_set(x):
 def main():
     P = {json.loads(l)["id"]: json.loads(l) for l in open(os.path.join(D, "prompts.jsonl"))}
     rows = []
-    for f in sorted(glob.glob(os.path.join(D, "responses_*.jsonl"))):
+    files = glob.glob(os.path.join(D, "responses_*.jsonl"))
+    files.sort(key=lambda f: ("lite" in f, f))   # full model first, then lighter variants
+    for f in files:
         model = os.path.basename(f)[len("responses_"):-len(".jsonl")]
         last = {}
         for l in open(f):
@@ -65,6 +67,7 @@ def main():
             con, refc = as_set(a.get("contested")), as_set(p["ref_contested"])
             s["abstain"].append(int(abst))
             s["correct"].append(int((not abst) and ans == ref and con == refc))
+            s["correct_con" if p["ref_contested_any"] else "correct_unc"].append(s["correct"][-1])
             if p["ref_contested_any"] and not abst:
                 s["contested"].append(int(bool(con & refc)))
             ua, ut = as_set(a.get("unaccounted")), set(p["unaccounted_true"])
@@ -86,7 +89,8 @@ def main():
         rank = lambda c: next((i for i, o in enumerate(order) if c.startswith(o)), len(order))
         for cond, s in sorted(acc.items(), key=lambda kv: (rank(kv[0]), kv[0])):
             mean = lambda k: (sum(s[k]) / len(s[k])) if s[k] else float("nan")
-            rows.append(dict(model=model, condition=cond, n=len(s["n"]), correct=mean("correct"), abstain=mean("abstain"),
+            rows.append(dict(model=model, condition=cond, n=len(s["n"]), correct=mean("correct"),
+                             correct_con=mean("correct_con"), correct_unc=mean("correct_unc"), abstain=mean("abstain"),
                              contested=mean("contested") if len(s["contested"]) >= 10 else float("nan"), unacc_recall=mean("unacc_recall"), unacc_prec=mean("unacc_prec"),
                              invalid_ids=mean("invalid_ids"), parse_fail=mean("parse_fail"), tokens=mean("tokens")))
     if not rows:
@@ -95,15 +99,24 @@ def main():
         w = csv.DictWriter(fh, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
     tex = lambda t: t.replace("%", "\\%")
     f2 = lambda v: "--" if v != v else f"{v:.2f}"
-    body = "\n".join(f"{r['model']} & {tex(r['condition'])} & {r['n']} & {f2(r['correct'])} & {f2(r['abstain'])} & {f2(r['contested'])} & "
-                     f"{f2(r['unacc_recall'])} & {f2(r['invalid_ids'])} & {r['tokens']:.0f} \\\\" for r in rows)
+    lines, prev = [], None
+    for r in rows:
+        if prev is not None and r["model"] != prev:
+            lines.append("\\midrule")
+        name = r["model"] if r["model"] != prev else ""
+        lines.append(f"{name} & {tex(r['condition'])} & {f2(r['correct'])} & {f2(r['correct_con'])} & {f2(r['correct_unc'])} & "
+                     f"{f2(r['abstain'])} & {f2(r['contested'])} & {f2(r['unacc_recall'])} & {f2(r['invalid_ids'])} & {r['tokens']:.0f} \\\\")
+        prev = r["model"]
+    body = "\n".join(lines)
     open(os.path.join(D, "table_llm.tex"), "w").write(
-        "\\begin{table*}[t]\\centering\\footnotesize\n\\caption{LLM readers on retained subgraphs (100 queries, including all 52 queries "
-        "with a contested reference). Correct: answer and contested flags equal the reference. Contested: share of contested-reference "
-        "queries answered by the model where the contest is reported (-- if fewer than 10 such answers). Unacc.\\ recall: share of truly unaccounted candidates that the model lists. "
-        "Invalid ids: responses citing a node not in the prompt. Tokens: mean prompt tokens.}\\label{tab:llm}\n"
-        "\\resizebox{\\textwidth}{!}{%\n\\begin{tabular}{llccccccc}\\toprule\nModel & Condition & $n$ & Correct & Abstain & Contested & "
-        "Unacc.\\ recall & Invalid ids & Tokens\\\\\\midrule\n" + body + "\n\\bottomrule\\end{tabular}}\n\\end{table*}\n")
+        "\\begin{table*}[t]\\centering\\footnotesize\n\\caption{LLM readers on retained subgraphs (100 queries per condition: all 52 queries "
+        "with a contested reference and 48 others). Correct: answer and contested flags equal the reference, also split by contested-reference "
+        "and other queries. Contest rep.: share of answered contested-reference queries where the contest is reported (-- if fewer than 10 such answers). "
+        "Unacc.\\ recall: share of truly unaccounted candidates that the model lists. Invalid ids: responses citing a node not in the prompt. "
+        "Tokens: mean prompt tokens.}\\label{tab:llm}\n"
+        "\\resizebox{\\textwidth}{!}{%\n\\begin{tabular}{llcccccccc}\\toprule\n"
+        "Model & Condition & Correct & \\multicolumn{2}{c}{Correct by query} & Abstain & Contest rep. & Unacc.\\ recall & Invalid ids & Tokens\\\\\n"
+        " & & & contested & other & & & & & \\\\\\midrule\n" + body + "\n\\bottomrule\\end{tabular}}\n\\end{table*}\n")
     for r in rows:
         print(f"{r['model']:28s} {r['condition']:52s} n={r['n']:3d} correct={f2(r['correct'])} abstain={f2(r['abstain'])} "
               f"contested={f2(r['contested'])} unacc_recall={f2(r['unacc_recall'])} tokens={r['tokens']:.0f}")

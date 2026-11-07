@@ -1,6 +1,11 @@
-model,condition,n,correct,abstain,contested,unacc_recall,unacc_prec,invalid_ids,parse_fail,tokens
-gemini-flash-latest,EPS @ 30% + certificate,100,0.99,0.0,1.0,nan,nan,0.0,0.0,3820.48
-gemini-flash-latest,EPS @ 20% + certificate,100,0.01,0.99,nan,0.9988888888888888,0.9988888888888888,0.0,0.0,3141.95
-gemini-flash-latest,Exclusion-aware closure @ 30%,100,0.49,0.29,0.9142857142857143,0.957661501139762,0.9832819354558485,0.0,0.0,3864.76
-gemini-flash-latest,Conflict-free (CONSIST-inspired) @ 30%,100,0.19,0.36,0.0,1.0,0.9991666666666668,0.0,0.0,2424.49
-gemini-flash-latest,PPR relevance @ 30%,100,0.0,1.0,nan,0.9963947368421053,0.9973988095238095,0.0,0.0,3786.22
+model,condition,n,correct,correct_con,correct_unc,abstain,contested,unacc_recall,unacc_prec,invalid_ids,parse_fail,tokens
+gemini-flash-latest,EPS @ 30% + certificate,100,0.99,1.0,0.9791666666666666,0.0,1.0,nan,nan,0.0,0.0,3820.48
+gemini-flash-latest,EPS @ 20% + certificate,100,0.01,0.019230769230769232,0.0,0.99,nan,0.9988888888888888,0.9988888888888888,0.0,0.0,3141.95
+gemini-flash-latest,Exclusion-aware closure @ 30%,100,0.49,0.28846153846153844,0.7083333333333334,0.29,0.9142857142857143,0.957661501139762,0.9832819354558485,0.0,0.0,3864.76
+gemini-flash-latest,Conflict-free (CONSIST-inspired) @ 30%,100,0.19,0.0,0.3958333333333333,0.36,0.0,1.0,0.9991666666666668,0.0,0.0,2424.49
+gemini-flash-latest,PPR relevance @ 30%,100,0.0,0.0,0.0,1.0,nan,0.9963947368421053,0.9973988095238095,0.0,0.0,3786.22
+gemini-3.1-flash-lite,EPS @ 30% + certificate,100,0.74,0.6346153846153846,0.8541666666666666,0.0,0.8846153846153846,nan,nan,0.0,0.0,3820.48
+gemini-3.1-flash-lite,EPS @ 20% + certificate,100,0.6,0.38461538461538464,0.8333333333333334,0.03,0.7307692307692307,1.0,0.9971666666666666,0.0,0.0,3141.95
+gemini-3.1-flash-lite,Exclusion-aware closure @ 30%,100,0.42,0.11538461538461539,0.75,0.0,0.6153846153846154,0.8598414870154001,0.7884359598949382,0.0,0.0,3864.76
+gemini-3.1-flash-lite,Conflict-free (CONSIST-inspired) @ 30%,100,0.47,0.0,0.9791666666666666,0.0,0.0,0.9856153291153291,0.9733625541125541,0.0,0.0,2424.49
+gemini-3.1-flash-lite,PPR relevance @ 30%,100,0.0,0.0,0.0,0.9,nan,0.9628421052631579,0.9842565597667638,0.0,0.0,3786.22
